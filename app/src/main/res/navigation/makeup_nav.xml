@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/makeup_nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/makeup_nav"
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.home.HomeFragment"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/brandFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.brand.BrandFragment"
+        android:label="brand_fragment"
+        tools:layout="@layout/brand_fragment" />
+    <fragment
+        android:id="@+id/productTypeFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.productType.ProductTypeFragment"
+        android:label="product_type_fragment"
+        tools:layout="@layout/product_type_fragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.search.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
 </navigation>
