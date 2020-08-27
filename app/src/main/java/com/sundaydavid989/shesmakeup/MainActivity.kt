@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
             ) { dialogInterface: DialogInterface, _: Int ->
                 dialogInterface.dismiss()
                 exitProcess(0)
-
             }
             .setNegativeButton(
                 "NO"
@@ -69,6 +68,6 @@ class MainActivity : AppCompatActivity() {
         binding.toolbar.visibility = View.VISIBLE
     }
     private fun hideToolBar(){
-        binding.toolbar.visibility - View.GONE
+        binding.toolbar.visibility = View.GONE
     }
 }
