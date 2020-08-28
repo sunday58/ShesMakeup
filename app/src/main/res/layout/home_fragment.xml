@@ -8,7 +8,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMakeup"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
@@ -25,11 +25,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="2dp"
         app:sdMainFabClosedBackgroundColor="@color/white"
         app:sdMainFabOpenedBackgroundColor="@color/white"
+        app:sdMainFabClosedIconColor="@color/colorPrimary"
+        app:sdMainFabOpenedIconColor="@color/colorPrimary"
         app:layout_behavior="@string/speeddial_scrolling_view_snackbar_behavior"
         app:sdExpansionMode="top"
+        android:layout_margin="2dp"
         app:sdMainFabAnimationRotateAngle="90"
         app:sdMainFabClosedSrc="@drawable/ic_makeup"
         app:sdMainFabOpenedSrc="@drawable/ic_makeup"
