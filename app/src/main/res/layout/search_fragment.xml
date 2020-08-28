@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.search.SearchFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/searchTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:textSize="20sp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:textStyle="bold"/>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchMakeup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/searchTitle"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimary"
+        app:searchIcon="@drawable/ic_search"
+        app:queryHint="Makeup name"
+        android:focusable="true"
+        android:focusedByDefault="true"
+        app:iconifiedByDefault="false"/>
+
+</RelativeLayout>

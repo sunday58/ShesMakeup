@@ -13,12 +13,12 @@
     <fragment
         android:id="@+id/brandFragment"
         android:name="com.sundaydavid989.shesmakeup.ui.brand.BrandFragment"
-        android:label="brand_fragment"
+        android:label="brands"
         tools:layout="@layout/brand_fragment" />
     <fragment
         android:id="@+id/productTypeFragment"
         android:name="com.sundaydavid989.shesmakeup.ui.productType.ProductTypeFragment"
-        android:label="product_type_fragment"
+        android:label="product type"
         tools:layout="@layout/product_type_fragment" />
     <fragment
         android:id="@+id/searchFragment"
