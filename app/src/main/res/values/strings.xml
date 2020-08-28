@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">She\'s Makeup</string>
+    <string name="makeup">Makeup</string>
+    <string name="try_on">Try-on</string>
 </resources>

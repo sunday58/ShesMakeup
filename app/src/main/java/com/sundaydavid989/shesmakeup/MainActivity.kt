@@ -31,7 +31,9 @@ class MainActivity : AppCompatActivity() {
     private fun setDestinationListener(){
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
-                R.id.homeFragment -> {
+                R.id.homeFragment,
+                R.id.brandFragment,
+                R.id.searchFragment -> {
                     hideToolBar()
                 }else -> {
                     showToolBar()

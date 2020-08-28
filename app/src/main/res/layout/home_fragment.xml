@@ -2,39 +2,83 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.leinardi.android.speeddial.SpeedDialOverlayLayout
-        android:id="@+id/overlay"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:clickable_overlay="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <com.leinardi.android.speeddial.SpeedDialView
-        android:id="@+id/speedDial"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:sdMainFabClosedBackgroundColor="@color/white"
-        app:sdMainFabOpenedBackgroundColor="@color/white"
-        app:sdMainFabClosedIconColor="@color/colorPrimary"
-        app:sdMainFabOpenedIconColor="@color/colorPrimary"
-        app:layout_behavior="@string/speeddial_scrolling_view_snackbar_behavior"
-        app:sdExpansionMode="top"
-        android:layout_margin="2dp"
-        app:sdMainFabAnimationRotateAngle="90"
-        app:sdMainFabClosedSrc="@drawable/ic_makeup"
-        app:sdMainFabOpenedSrc="@drawable/ic_makeup"
-        app:sdOverlayLayout="@id/overlay" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="@string/makeup"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:fontFamily="@font/lilita_one"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/try_on"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/lily_script_one"/>
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/frame_shape">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.leinardi.android.speeddial.SpeedDialOverlayLayout
+            android:id="@+id/overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            app:clickable_overlay="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.leinardi.android.speeddial.SpeedDialView
+            android:id="@+id/speedDial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:sdMainFabClosedBackgroundColor="@color/white"
+            app:sdMainFabOpenedBackgroundColor="@color/white"
+            app:sdMainFabClosedIconColor="@color/colorPrimary"
+            app:sdMainFabOpenedIconColor="@color/colorPrimary"
+            app:layout_behavior="@string/speeddial_scrolling_view_snackbar_behavior"
+            app:sdExpansionMode="top"
+            android:layout_margin="2dp"
+            app:sdMainFabAnimationRotateAngle="90"
+            app:sdMainFabClosedSrc="@drawable/ic_makeup"
+            app:sdMainFabOpenedSrc="@drawable/ic_makeup"
+            app:sdOverlayLayout="@id/overlay" />
+    </FrameLayout>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

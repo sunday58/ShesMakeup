@@ -11,6 +11,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.sundaydavid989.shesmakeup.R
@@ -81,15 +82,18 @@ class HomeFragment : Fragment() {
             binding!!.speedDial.setOnActionSelectedListener {actionItem ->
                 when (actionItem.id) {
                     R.id.brand -> {
-                        showToast("action clicked")
+                        Navigation.findNavController(binding!!.homeLayout)
+                            .navigate(R.id.brandFragment)
                         return@setOnActionSelectedListener true
                     }
                     R.id.product_type -> {
-                        showToast("action 2 clicked")
+                        Navigation.findNavController(binding!!.homeLayout)
+                            .navigate(R.id.productTypeFragment)
                         return@setOnActionSelectedListener true
                     }
                     R.id.search -> {
-                        showToast("action 3 clicked")
+                        Navigation.findNavController(binding!!.homeLayout)
+                            .navigate(R.id.searchFragment)
                         return@setOnActionSelectedListener true
                     }
                   else  -> {
