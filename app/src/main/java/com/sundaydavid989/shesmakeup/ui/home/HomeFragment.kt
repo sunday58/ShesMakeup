@@ -1,13 +1,11 @@
 package com.sundaydavid989.shesmakeup.ui.home
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +14,6 @@ import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.databinding.HomeFragmentBinding
-import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : Fragment() {
 

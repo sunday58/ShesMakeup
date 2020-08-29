@@ -47,11 +47,12 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/make_up_list_item" />
 
         <com.leinardi.android.speeddial.SpeedDialOverlayLayout
             android:id="@+id/overlay"

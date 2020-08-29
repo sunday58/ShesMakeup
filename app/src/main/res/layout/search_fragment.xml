@@ -25,11 +25,12 @@
         android:layout_marginTop="4dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/search_view_background"
+        android:theme="@style/ThemeOverlay.SearchView"
         app:searchIcon="@drawable/ic_search"
         app:queryHint="Makeup name"
-        android:focusable="true"
-        android:focusedByDefault="true"
-        app:iconifiedByDefault="false"/>
+        app:showAsAction="always"
+        app:iconifiedByDefault="false"
+        android:focusable="true"/>
 
 </RelativeLayout>
