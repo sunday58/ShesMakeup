@@ -85,6 +85,4 @@
             app:sdOverlayLayout="@id/overlay" />
     </FrameLayout>
 
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
