@@ -1,13 +1,18 @@
 package com.sundaydavid989.shesmakeup.data.db.entity
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "make_up")
 data class MakeupItem(
     val brand: String,
     val category: String,
     val currency: String,
     val description: String,
+    @PrimaryKey(autoGenerate = false)
     val id: Int,
     @SerializedName("image_link")
     val imageLink: String,
@@ -15,13 +20,12 @@ data class MakeupItem(
     val price: String,
     @SerializedName("price_sign")
     val priceSign: String,
+    @TypeConverters(MakeupTypeConverter::class)
     @SerializedName("product_colors")
     val productColors: List<ProductColor>,
     @SerializedName("product_link")
     val productLink: String,
     @SerializedName("product_type")
     val productType: String,
-    val rating: Double,
-    @SerializedName("tag_list")
-    val tagList: List<String>
+    val rating: Double
 )
