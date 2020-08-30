@@ -16,7 +16,7 @@ import com.sundaydavid989.shesmakeup.data.db.entity.MakeupTypeConverter
 )
 @TypeConverters(MakeupTypeConverter::class)
 abstract class MakeupDatabase : RoomDatabase() {
-        abstract fun makeupItem(): MakeupItem
+        abstract fun makeupItemDao(): MakeupDao
 
     companion object {
         @Volatile private var instance: MakeupDatabase? = null
