@@ -12,7 +12,7 @@ class MakeupTypeConverter {
         return Gson().fromJson<List<ProductColor>>(value, listType)
     }
     @TypeConverter
-    fun listToString(list: List<String?>?): String? {
+    fun listToString(list: List<ProductColor?>?): String? {
         val gson = Gson()
         return gson.toJson(list)
     }

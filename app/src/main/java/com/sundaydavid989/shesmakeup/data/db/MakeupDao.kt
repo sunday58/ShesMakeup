@@ -6,13 +6,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
+import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 
 @Dao
 interface MakeupDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(makeupItem: Makeup)
+    fun upsert(makeupItem: List<MakeupItem>)
 
     @Query("SELECT * FROM make_up")
-    fun getMakeup(): LiveData<Makeup>
+    fun getMakeup(): LiveData<List<MakeupItem>>
 }

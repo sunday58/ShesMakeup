@@ -3,6 +3,7 @@ package com.sundaydavid989.shesmakeup.data.repository
 import androidx.lifecycle.LiveData
 import com.sundaydavid989.shesmakeup.data.db.MakeupDao
 import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
+import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.network.MakeupNetworkDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -22,7 +23,7 @@ class MakeupRepositoryImpl(
         }
     }
 
-    override suspend fun getMakeup(): LiveData<Makeup> {
+    override suspend fun getMakeup(): LiveData<List<MakeupItem>> {
         return withContext(Dispatchers.IO) {
             return@withContext makeupDao.getMakeup()
         }
