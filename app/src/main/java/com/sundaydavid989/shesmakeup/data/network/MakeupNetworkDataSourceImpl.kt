@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
+import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.internal.NoConnectivityException
 
 class MakeupNetworkDataSourceImpl(

@@ -29,7 +29,7 @@ class MakeupRepositoryImpl(
         }
     }
 
-    private fun persistFetchedMakeup(fetchedMakeup: Makeup) {
+    private fun persistFetchedMakeup(fetchedMakeup: List<MakeupItem>) {
         GlobalScope.launch(Dispatchers.IO) {
             makeupDao.upsert(fetchedMakeup)
         }

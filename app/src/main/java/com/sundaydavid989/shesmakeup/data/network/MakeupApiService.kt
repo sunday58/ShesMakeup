@@ -3,6 +3,7 @@ package com.sundaydavid989.shesmakeup.data.network
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.sundaydavid989.shesmakeup.Constants
 import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
+import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -32,7 +33,6 @@ interface MakeupApiService {
                 return@Interceptor chain.proceed(request)
             }
             val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
                 .build()
 

@@ -6,6 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
+import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItemTypeConverter
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupTypeConverter
 
 
