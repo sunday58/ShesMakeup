@@ -44,7 +44,7 @@
         android:background="@drawable/frame_shape">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/homeRecyclerView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -83,6 +83,16 @@
             app:sdMainFabClosedSrc="@drawable/ic_makeup"
             app:sdMainFabOpenedSrc="@drawable/ic_makeup"
             app:sdOverlayLayout="@id/overlay" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinKit"
+            style="@style/SpinKitView.FadingCircle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"
+            app:SpinKit_Color="@color/colorPrimary"/>
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

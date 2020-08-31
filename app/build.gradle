@@ -93,4 +93,7 @@ dependencies {
 
     //speed dial
     implementation "com.leinardi.android:speed-dial:3.1.1"
+
+    //progress bar
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }

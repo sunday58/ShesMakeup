@@ -5,21 +5,34 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.databinding.HomeFragmentBinding
+import com.sundaydavid989.shesmakeup.ui.adapters.HomeAdapter
+import com.sundaydavid989.shesmakeup.ui.base.ScopedFragment
+import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class HomeFragment : Fragment() {
+class HomeFragment : ScopedFragment(), KodeinAware {
 
+    override val kodein by closestKodein()
+    private val viewModelFactory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding
+    private lateinit var adapter: HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,13 +41,26 @@ class HomeFragment : Fragment() {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
 
         initSpeedDial(savedInstanceState == null)
+        binding!!.spinKit.visibility = View.VISIBLE
         return binding?.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+        bindUI()
+    }
 
+    private fun bindUI() = launch {
+        binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        val makeups = viewModel.makeup.await()
+        makeups.observe(viewLifecycleOwner, Observer { makeupItems ->
+            if (makeupItems == null) return@Observer
+            adapter = HomeAdapter(makeupItems, requireContext())
+            binding!!.homeRecyclerView.adapter = adapter
+            adapter.notifyDataSetChanged()
+            binding!!.spinKit.visibility = View.GONE
+        })
     }
 
     private fun initSpeedDial(addActionItem:  Boolean){

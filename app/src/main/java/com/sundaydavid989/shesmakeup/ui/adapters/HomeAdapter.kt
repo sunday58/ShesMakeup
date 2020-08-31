@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
+import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.databinding.MakeUpListItemBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 
-class HomeAdapter(private val makeupList: Makeup, private val context: Context)
+class HomeAdapter(private val makeupList: List<MakeupItem>, private val context: Context)
     :RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,6 +24,7 @@ class HomeAdapter(private val makeupList: Makeup, private val context: Context)
         with(holder) {
             with(makeupList[position]) {
                 binding.makeupName.text = name
+                binding.brandName.text = brand
                 GlideApp.with(context)
                     .load(imageLink)
                     .into(binding.makeUpImage)
