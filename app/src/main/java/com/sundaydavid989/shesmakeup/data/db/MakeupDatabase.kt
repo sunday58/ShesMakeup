@@ -13,7 +13,7 @@ import com.sundaydavid989.shesmakeup.data.db.entity.MakeupTypeConverter
 @Database(
     exportSchema = false,
     entities = [MakeupItem::class],
-    version = 1
+    version = 4
 )
 @TypeConverters(MakeupTypeConverter::class)
 abstract class MakeupDatabase : RoomDatabase() {

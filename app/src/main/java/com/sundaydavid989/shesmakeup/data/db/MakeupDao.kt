@@ -12,7 +12,7 @@ import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 interface MakeupDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(makeupItem: List<MakeupItem>)
+    fun upsert(makeupItem: Makeup)
 
     @Query("SELECT * FROM make_up")
     fun getMakeup(): LiveData<List<MakeupItem>>

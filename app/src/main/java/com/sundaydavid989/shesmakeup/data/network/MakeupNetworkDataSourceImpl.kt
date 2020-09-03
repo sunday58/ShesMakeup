@@ -23,7 +23,7 @@ class MakeupNetworkDataSourceImpl(
                  _downloadMakeup.postValue(fetchMakeup)
         }
         catch (e: NoConnectivityException){
-            Log.e("connectivity ", "No internet connection", e)
+            Log.d("connectivity ", "No internet connection", e)
         }
     }
 }

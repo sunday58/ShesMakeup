@@ -11,4 +11,5 @@ class HomeViewModel(
     val makeup by lazyDeferred {
         makeupRepository.getMakeup()
     }
+
 }

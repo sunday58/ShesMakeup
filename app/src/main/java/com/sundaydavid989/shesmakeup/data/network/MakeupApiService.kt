@@ -33,6 +33,7 @@ interface MakeupApiService {
                 return@Interceptor chain.proceed(request)
             }
             val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
                 .build()
 
