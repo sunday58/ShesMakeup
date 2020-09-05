@@ -5,7 +5,7 @@ import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 
 interface MakeupNetworkDataSource {
-    val downloadMakeup: LiveData<Makeup>
+    val downloadMakeup: LiveData<out Array<MakeupItem>>
 
     suspend fun fetchMakeup()
 }

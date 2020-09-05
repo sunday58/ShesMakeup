@@ -8,24 +8,24 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "make_up")
 data class MakeupItem(
-    val brand: String,
-    val category: String,
-    val currency: String,
-    val description: String,
+    val brand: String?,
+    val category: String?,
+    val currency: String?,
+    val description: String?,
     @PrimaryKey(autoGenerate = false)
     val id: Int,
     @SerializedName("image_link")
-    val imageLink: String,
+    val imageLink: String?,
     val name: String,
-    val price: String,
+    val price: String?,
     @SerializedName("price_sign")
-    val priceSign: String,
+    val priceSign: String?,
     @TypeConverters(MakeupTypeConverter::class)
     @SerializedName("product_colors")
     val productColors: List<ProductColor>,
     @SerializedName("product_link")
-    val productLink: String,
+    val productLink: String?,
     @SerializedName("product_type")
-    val productType: String,
-    val rating: Double
+    val productType: String?,
+    val rating: Double?
 )

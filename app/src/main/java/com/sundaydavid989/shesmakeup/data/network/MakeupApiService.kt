@@ -2,7 +2,6 @@ package com.sundaydavid989.shesmakeup.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.sundaydavid989.shesmakeup.Constants
-import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -10,11 +9,12 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import java.util.concurrent.TimeUnit
 
 interface MakeupApiService {
 
     @GET("api/v1/products.json")
-    fun getMakeup(): Deferred<Makeup>
+    fun getMakeupAsync(): Deferred<Array<MakeupItem>>
 
     companion object {
         operator fun invoke(
@@ -33,6 +33,8 @@ interface MakeupApiService {
                 return@Interceptor chain.proceed(request)
             }
             val okHttpClient = OkHttpClient.Builder()
+                .readTimeout(10, TimeUnit.MINUTES)
+                .connectTimeout(10, TimeUnit.MINUTES)
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(connectivityInterceptor)
                 .build()

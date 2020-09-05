@@ -25,13 +25,18 @@ class MakeupRepositoryImpl(
 
     override suspend fun getMakeup(): LiveData<List<MakeupItem>> {
         return withContext(Dispatchers.IO) {
+            fetchMakeup()
             return@withContext makeupDao.getMakeup()
         }
     }
 
-    private fun persistFetchedMakeup(fetchedMakeup: Makeup) {
+    private fun persistFetchedMakeup(fetchedMakeup: Array<MakeupItem>) {
         GlobalScope.launch(Dispatchers.IO) {
             makeupDao.upsert(fetchedMakeup)
         }
+    }
+
+    private suspend fun fetchMakeup(){
+        makeupNetworkDataSource.fetchMakeup()
     }
 }
