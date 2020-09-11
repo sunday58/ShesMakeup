@@ -25,4 +25,9 @@
         android:name="com.sundaydavid989.shesmakeup.ui.search.SearchFragment"
         android:label="search_fragment"
         tools:layout="@layout/search_fragment" />
+    <fragment
+        android:id="@+id/homeDetailFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.details.HomeDetailFragment"
+        android:label=""
+        tools:layout="@layout/fragment_home_detail" />
 </navigation>

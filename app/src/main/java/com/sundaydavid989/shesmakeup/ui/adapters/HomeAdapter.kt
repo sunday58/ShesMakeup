@@ -3,8 +3,9 @@ package com.sundaydavid989.shesmakeup.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
+import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.databinding.MakeUpListItemBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
@@ -28,10 +29,15 @@ class HomeAdapter(private val makeupList: List<MakeupItem>, private val context:
                 GlideApp.with(context)
                     .load(imageLink)
                     .into(binding.makeUpImage)
+
+                //Navigation
+                holder.itemView.setOnClickListener {
+                    Navigation.findNavController(itemView).navigate(R.id.homeDetailFragment)
+                }
             }
         }
     }
 
-    inner class ViewHolder( val binding: MakeUpListItemBinding)
+    class ViewHolder( val binding: MakeUpListItemBinding)
         : RecyclerView.ViewHolder(binding.root)
 }
