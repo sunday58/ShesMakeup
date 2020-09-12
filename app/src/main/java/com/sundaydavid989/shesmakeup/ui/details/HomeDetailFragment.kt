@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.databinding.FragmentHomeDetailBinding
+import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 
 class HomeDetailFragment : Fragment() {
 
@@ -31,9 +32,12 @@ class HomeDetailFragment : Fragment() {
         if (arguments != null && requireArguments().containsKey("makeups")){
             makeups = requireArguments().getSerializable("makeups") as MakeupItem
 
-            binding!!.detailPrice.text = makeups.priceSign + makeups.price
+            binding!!.detailPrice.text = makeups.currency + makeups.price
             binding!!.detailProductName.text = makeups.name
             binding!!.detailCategory.text = makeups.category
+            GlideApp.with(requireContext())
+                .load(makeups.imageLink)
+                .into(binding!!.makeupDetailImage)
         }
     }
 

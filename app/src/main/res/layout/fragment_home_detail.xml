@@ -27,6 +27,7 @@
         android:id="@+id/materialCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         android:layout_below="@id/makeupDetailImage">
 
         <RelativeLayout
