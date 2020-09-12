@@ -1,6 +1,7 @@
 package com.sundaydavid989.shesmakeup.ui.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -32,7 +33,9 @@ class HomeAdapter(private val makeupList: List<MakeupItem>, private val context:
 
                 //Navigation
                 holder.itemView.setOnClickListener {
-                    Navigation.findNavController(itemView).navigate(R.id.homeDetailFragment)
+                    val bundle = Bundle()
+                    bundle.putSerializable("makeups", makeupList[position])
+                    Navigation.findNavController(itemView).navigate(R.id.homeDetailFragment, bundle)
                 }
             }
         }

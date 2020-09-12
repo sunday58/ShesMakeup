@@ -1,14 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.details.HomeDetailFragment">
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.details.HomeDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <ImageView
+       android:id="@+id/makeupDetailImage"
+       android:layout_width="match_parent"
+       android:layout_height="300dp"
+       android:src="@drawable/make_up"
+       android:scaleType="centerCrop"
+       android:contentDescription="@string/makeup_image"/>
 
-</FrameLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/makeupDetailImage">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/detailPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="$35"
+                android:layout_marginStart="@dimen/margin_24"
+                android:layout_marginTop="@dimen/margin_24"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/detailProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detailBuy"
+                android:layout_marginStart="@dimen/margin_24"
+                android:layout_marginTop="@dimen/margin_24"
+                tools:text="Product Name"
+                android:textColor="@color/white"
+                android:layout_marginEnd="@dimen/margin_8"/>
+
+            <TextView
+                android:id="@+id/detailCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_24"
+                tools:text="Category"
+                android:layout_below="@id/detailProductName"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_8"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/detailBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buy"
+                android:textColor="@color/colorPrimary"
+                app:backgroundTint="@color/white"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/margin_24"
+                app:elevation="@dimen/margin_8"
+                app:cornerRadius="5dp"
+                android:padding="16dp"
+                android:layout_marginEnd="@dimen/margin_8"
+                tools:ignore="RelativeOverlap" />
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/makeupDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_make_up_description"
+        app:backgroundTint="@color/white"
+        app:tint="@color/colorPrimary"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/materialCard"
+        android:layout_marginEnd="@dimen/margin_24"
+        android:contentDescription="@string/description_icon" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/productColor"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@color/colorPrimary"
+        android:layout_below="@id/materialCard"
+        android:layout_marginTop="@dimen/margin_24"
+        android:layout_marginStart="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_8"/>
+
+</RelativeLayout>
+</androidx.core.widget.NestedScrollView>

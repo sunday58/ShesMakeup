@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(tableName = "make_up")
 data class MakeupItem(
@@ -28,4 +29,4 @@ data class MakeupItem(
     @SerializedName("product_type")
     val productType: String?,
     val rating: Double?
-)
+): Serializable
