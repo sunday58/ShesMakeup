@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
-            android:padding="16dp">
+            android:padding="8dp">
 
             <TextView
                 android:id="@+id/detailPrice"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/detailBuy"
                 android:layout_marginStart="@dimen/margin_24"
-                android:layout_marginTop="@dimen/margin_24"
+                android:layout_marginTop="16dp"
                 tools:text="Product Name"
                 android:textColor="@color/white"
                 android:layout_marginEnd="@dimen/margin_8"/>
@@ -80,7 +80,7 @@
                 android:layout_marginTop="@dimen/margin_24"
                 app:elevation="@dimen/margin_8"
                 app:cornerRadius="5dp"
-                android:padding="16dp"
+                android:padding="8dp"
                 android:layout_marginEnd="@dimen/margin_8"
                 tools:ignore="RelativeOverlap" />
 

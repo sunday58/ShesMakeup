@@ -14,7 +14,7 @@ class HomeDetailFragment : Fragment() {
 
     private var _binding: FragmentHomeDetailBinding? = null
     private val binding get() = _binding
-    lateinit var makeups: MakeupItem
+    private lateinit var makeups: MakeupItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +32,7 @@ class HomeDetailFragment : Fragment() {
         if (arguments != null && requireArguments().containsKey("makeups")){
             makeups = requireArguments().getSerializable("makeups") as MakeupItem
 
-            binding!!.detailPrice.text = makeups.currency + makeups.price
+            binding!!.detailPrice.text = "$" + makeups.price
             binding!!.detailProductName.text = makeups.name
             binding!!.detailCategory.text = makeups.category
             GlideApp.with(requireContext())
