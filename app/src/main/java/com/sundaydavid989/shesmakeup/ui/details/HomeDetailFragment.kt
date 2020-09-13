@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.databinding.FragmentHomeDetailBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
@@ -15,6 +16,7 @@ class HomeDetailFragment : Fragment() {
     private var _binding: FragmentHomeDetailBinding? = null
     private val binding get() = _binding
     private lateinit var makeups: MakeupItem
+    private lateinit var sheetBehavior: BottomSheetBehavior<View>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +25,8 @@ class HomeDetailFragment : Fragment() {
         // Inflate the layout for this fragment
        _binding = FragmentHomeDetailBinding.inflate(inflater, container, false)
 
+        sheetBehavior = BottomSheetBehavior.from(binding!!.bottomSheet)
+        checkBottomSheet()
         detailMakeup()
         return binding?.root
     }
@@ -35,9 +39,20 @@ class HomeDetailFragment : Fragment() {
             binding!!.detailPrice.text = "$" + makeups.price
             binding!!.detailProductName.text = makeups.name
             binding!!.detailCategory.text = makeups.category
+            binding!!.description.text = makeups.description
             GlideApp.with(requireContext())
                 .load(makeups.imageLink)
                 .into(binding!!.makeupDetailImage)
+        }
+    }
+
+    private fun checkBottomSheet(){
+        binding!!.makeupDescription.setOnClickListener {
+            if (sheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED){
+                sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }else {
+                sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
         }
     }
 
