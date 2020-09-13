@@ -1,6 +1,8 @@
 package com.sundaydavid989.shesmakeup.ui.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +32,16 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding
     private lateinit var adapter: HomeAdapter
+
+    //recycler view state
+    private val KEY_RECYCLER_STATE = "recycler_state"
+    private lateinit var bundleRecyclerState: Bundle
+    private var mlistState: Parcelable? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bundleRecyclerState = Bundle()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -127,6 +139,23 @@ class HomeFragment : ScopedFragment(), KodeinAware {
 
     private fun showToast(message: String){
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mlistState = binding!!.homeRecyclerView.layoutManager!!.onSaveInstanceState()
+        bundleRecyclerState.putParcelable(KEY_RECYCLER_STATE, mlistState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (bundleRecyclerState != null) {
+            Handler().postDelayed({
+                mlistState = bundleRecyclerState.getParcelable(KEY_RECYCLER_STATE)
+                binding!!.homeRecyclerView.layoutManager!!.onRestoreInstanceState(mlistState)
+            }, 50)
+        }
+        binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
     }
     override fun onDestroyView() {
         super.onDestroyView()
