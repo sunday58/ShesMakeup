@@ -15,6 +15,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
+import com.sundaydavid989.shesmakeup.Constants.KEY_RECYCLER_STATE
 import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.databinding.HomeFragmentBinding
 import com.sundaydavid989.shesmakeup.ui.adapters.HomeAdapter
@@ -34,9 +35,8 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     private lateinit var adapter: HomeAdapter
 
     //recycler view state
-    private val KEY_RECYCLER_STATE = "recycler_state"
     private lateinit var bundleRecyclerState: Bundle
-    private var mlistState: Parcelable? = null
+    private var listState: Parcelable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,16 +143,16 @@ class HomeFragment : ScopedFragment(), KodeinAware {
 
     override fun onPause() {
         super.onPause()
-        mlistState = binding!!.homeRecyclerView.layoutManager!!.onSaveInstanceState()
-        bundleRecyclerState.putParcelable(KEY_RECYCLER_STATE, mlistState)
+        listState = binding!!.homeRecyclerView.layoutManager!!.onSaveInstanceState()
+        bundleRecyclerState.putParcelable(KEY_RECYCLER_STATE, listState)
     }
 
     override fun onResume() {
         super.onResume()
         if (bundleRecyclerState != null) {
             Handler().postDelayed({
-                mlistState = bundleRecyclerState.getParcelable(KEY_RECYCLER_STATE)
-                binding!!.homeRecyclerView.layoutManager!!.onRestoreInstanceState(mlistState)
+                listState = bundleRecyclerState.getParcelable(KEY_RECYCLER_STATE)
+                binding!!.homeRecyclerView.layoutManager!!.onRestoreInstanceState(listState)
             }, 50)
         }
         binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
