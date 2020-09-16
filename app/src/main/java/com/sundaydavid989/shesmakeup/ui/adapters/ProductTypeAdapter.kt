@@ -1,15 +1,10 @@
 package com.sundaydavid989.shesmakeup.ui.adapters
 
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.sundaydavid989.shesmakeup.R
-import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductTypeItem
-import com.sundaydavid989.shesmakeup.databinding.MakeUpListItemBinding
 import com.sundaydavid989.shesmakeup.databinding.ProductTypeItemListBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 
