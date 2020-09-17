@@ -107,15 +107,21 @@
         android:layout_marginEnd="@dimen/margin_24"
         android:contentDescription="@string/description_icon" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/productColor"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@color/colorPrimary"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productTypeDetailRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/materialCard"
-        android:layout_marginTop="@dimen/margin_24"
-        android:layout_marginStart="@dimen/margin_8"
-        android:layout_marginEnd="@dimen/margin_8"/>
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/colors_list_item" />
 
 </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
