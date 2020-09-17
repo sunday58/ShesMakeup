@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             when(destination.id) {
                 R.id.homeFragment,
                 R.id.searchFragment,
-                R.id.homeDetailFragment -> {
+                R.id.itemDetailFragment -> {
                     hideToolBar()
                 }else -> {
                     showToolBar()

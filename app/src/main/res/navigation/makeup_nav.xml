@@ -26,10 +26,10 @@
         android:label="search_fragment"
         tools:layout="@layout/search_fragment" />
     <fragment
-        android:id="@+id/homeDetailFragment"
-        android:name="com.sundaydavid989.shesmakeup.ui.details.HomeDetailFragment"
+        android:id="@+id/itemDetailFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.details.ItemDetailFragment"
         android:label=""
-        tools:layout="@layout/fragment_home_detail" />
+        tools:layout="@layout/fragment_item_detail" />
 
     <fragment
         android:id="@+id/productTypeDetailFragment"

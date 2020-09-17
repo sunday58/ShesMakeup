@@ -35,7 +35,7 @@ class HomeAdapter(private val makeupList: List<MakeupItem>, private val context:
                 holder.itemView.setOnClickListener {
                     val bundle = Bundle()
                     bundle.putSerializable("makeups", makeupList[position])
-                    Navigation.findNavController(itemView).navigate(R.id.homeDetailFragment, bundle)
+                    Navigation.findNavController(itemView).navigate(R.id.itemDetailFragment, bundle)
                 }
             }
         }

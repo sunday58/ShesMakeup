@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
-import com.sundaydavid989.shesmakeup.databinding.FragmentHomeDetailBinding
+import com.sundaydavid989.shesmakeup.databinding.FragmentItemDetailBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 
-class HomeDetailFragment : Fragment() {
+class ItemDetailFragment : Fragment() {
 
-    private var _binding: FragmentHomeDetailBinding? = null
+    private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding
     private lateinit var makeups: MakeupItem
     private lateinit var sheetBehavior: BottomSheetBehavior<View>
@@ -23,7 +23,7 @@ class HomeDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-       _binding = FragmentHomeDetailBinding.inflate(inflater, container, false)
+       _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
 
         sheetBehavior = BottomSheetBehavior.from(binding!!.bottomSheet)
         checkBottomSheet()
