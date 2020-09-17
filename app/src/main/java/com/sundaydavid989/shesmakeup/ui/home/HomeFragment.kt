@@ -63,14 +63,14 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     private fun bindUI() = launch {
         binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         val makeups = viewModel.makeup.await()
-        makeups.observe(viewLifecycleOwner, Observer { makeupItems ->
-            Log.d("Makeups ", makeupItems.toString())
-            if (makeupItems == null) return@Observer
-            adapter = HomeAdapter(makeupItems, requireContext())
-            binding!!.homeRecyclerView.adapter = adapter
-            adapter.notifyDataSetChanged()
-            binding!!.spinKit.visibility = View.GONE
-        })
+            makeups.observe(viewLifecycleOwner, Observer { makeupItems ->
+                Log.d("Makeups ", makeupItems.toString())
+                if (makeupItems == null) return@Observer
+                adapter = HomeAdapter(makeupItems, requireContext())
+                binding!!.homeRecyclerView.adapter = adapter
+                adapter.notifyDataSetChanged()
+                binding!!.spinKit.visibility = View.GONE
+            })
     }
 
     private fun initSpeedDial(addActionItem:  Boolean){

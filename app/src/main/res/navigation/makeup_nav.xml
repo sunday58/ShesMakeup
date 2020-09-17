@@ -30,4 +30,10 @@
         android:name="com.sundaydavid989.shesmakeup.ui.details.HomeDetailFragment"
         android:label=""
         tools:layout="@layout/fragment_home_detail" />
+
+    <fragment
+        android:id="@+id/productTypeDetailFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.details.ProductTypeDetailFragment"
+        android:label=""
+        tools:layout="@layout/product_type_detail_fragment" />
 </navigation>
