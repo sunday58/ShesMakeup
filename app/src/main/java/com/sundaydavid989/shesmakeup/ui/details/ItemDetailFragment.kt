@@ -1,6 +1,8 @@
 package com.sundaydavid989.shesmakeup.ui.details
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -56,6 +58,12 @@ class ItemDetailFragment : Fragment() {
             adapter = ItemColorAdapter(colors, requireContext())
             binding!!.itemColorsRecyclerView.adapter = adapter
             binding!!.itemColorsRecyclerView.adapter!!.notifyDataSetChanged()
+
+            //open sale url
+            binding!!.detailBuy.setOnClickListener {
+                val buyIntent = Intent(Intent.ACTION_VIEW, Uri.parse(makeups.productLink))
+                startActivity(buyIntent)
+            }
         }
     }
 

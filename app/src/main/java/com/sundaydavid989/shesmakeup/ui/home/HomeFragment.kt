@@ -61,8 +61,8 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() = launch {
-        binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        val makeups = viewModel.makeup.await()
+            binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+            val makeups = viewModel.makeup.await()
             makeups.observe(viewLifecycleOwner, Observer { makeupItems ->
                 Log.d("Makeups ", makeupItems.toString())
                 if (makeupItems == null) return@Observer
