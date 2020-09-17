@@ -3,7 +3,9 @@ package com.sundaydavid989.shesmakeup.ui.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductTypeItem
 import com.sundaydavid989.shesmakeup.databinding.ProductTypeItemListBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
@@ -28,7 +30,9 @@ class ProductTypeAdapter(private val makeupList: List<ProductTypeItem>, private 
                     .into(binding.productTypeImage)
 
                 //Navigation
-
+                holder.itemView.setOnClickListener {
+                    Navigation.findNavController(itemView).navigate(R.id.productTypeDetailFragment)
+                }
             }
         }
     }
