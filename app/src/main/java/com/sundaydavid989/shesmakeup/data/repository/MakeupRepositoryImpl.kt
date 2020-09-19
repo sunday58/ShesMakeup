@@ -2,14 +2,12 @@ package com.sundaydavid989.shesmakeup.data.repository
 
 import androidx.lifecycle.LiveData
 import com.sundaydavid989.shesmakeup.data.db.MakeupDao
-import com.sundaydavid989.shesmakeup.data.db.entity.Makeup
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.network.MakeupNetworkDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 
 class MakeupRepositoryImpl(
     private val makeupDao: MakeupDao,
@@ -30,6 +28,12 @@ class MakeupRepositoryImpl(
         }
     }
 
+    override suspend fun getProductType(): LiveData<List<MakeupItem>> {
+        return  withContext(Dispatchers.IO) {
+            return@withContext makeupDao.getMakeup()
+        }
+    }
+
     private fun persistFetchedMakeup(fetchedMakeup: Array<MakeupItem>) {
         GlobalScope.launch(Dispatchers.IO) {
             makeupDao.upsert(fetchedMakeup)
@@ -38,5 +42,9 @@ class MakeupRepositoryImpl(
 
     private suspend fun fetchMakeup(){
         makeupNetworkDataSource.fetchMakeup()
+    }
+
+     override suspend fun fetchProductType(name: String){
+        makeupNetworkDataSource.fetchProductType(name)
     }
 }

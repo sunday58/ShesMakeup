@@ -11,8 +11,12 @@ class MakeupNetworkDataSourceImpl(
 ) : MakeupNetworkDataSource {
 
     private val _downloadMakeup = MutableLiveData<Array<MakeupItem>>()
+    private val _downloadProductType = MutableLiveData<Array<MakeupItem>>()
+
     override val downloadMakeup: LiveData<out Array<MakeupItem>>
         get() = _downloadMakeup
+    override val downloadProductType: LiveData<out Array<MakeupItem>>
+        get() = _downloadProductType
 
     override suspend fun fetchMakeup() {
         try {
@@ -20,6 +24,18 @@ class MakeupNetworkDataSourceImpl(
                 .getMakeupAsync()
                 .await()
                  _downloadMakeup.postValue(fetchMakeup)
+        }
+        catch (e: NoConnectivityException){
+            Log.d("connectivity ", "No internet connection", e)
+        }
+    }
+
+    override suspend fun fetchProductType(name: String) {
+        try {
+            val fetchMakeup = makeupApiService
+                .getProductTypesAsync(name)
+                .await()
+            _downloadProductType.postValue(fetchMakeup)
         }
         catch (e: NoConnectivityException){
             Log.d("connectivity ", "No internet connection", e)

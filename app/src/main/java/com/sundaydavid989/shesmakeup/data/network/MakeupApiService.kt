@@ -9,12 +9,16 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 interface MakeupApiService {
 
     @GET("api/v1/products.json")
     fun getMakeupAsync(): Deferred<Array<MakeupItem>>
+
+    @GET("api/v1/products.json?")
+    fun getProductTypesAsync(@Query("name") name: String): Deferred<Array<MakeupItem>>
 
     companion object {
         operator fun invoke(

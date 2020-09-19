@@ -5,6 +5,7 @@ import com.sundaydavid989.shesmakeup.data.db.MakeupDatabase
 import com.sundaydavid989.shesmakeup.data.network.*
 import com.sundaydavid989.shesmakeup.data.repository.MakeupRepository
 import com.sundaydavid989.shesmakeup.data.repository.MakeupRepositoryImpl
+import com.sundaydavid989.shesmakeup.ui.details.ProductTypeDetailFactory
 import com.sundaydavid989.shesmakeup.ui.home.HomeViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -25,5 +26,6 @@ class MakeupApplication : Application(), KodeinAware {
         bind<MakeupNetworkDataSource>() with singleton { MakeupNetworkDataSourceImpl(instance()) }
         bind<MakeupRepository>() with singleton { MakeupRepositoryImpl(instance(), instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
+        bind() from provider { ProductTypeDetailFactory(instance()) }
     }
 }

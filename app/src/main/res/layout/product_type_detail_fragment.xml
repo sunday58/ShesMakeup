@@ -23,4 +23,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/make_up_list_item" />
 
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spinKitProduct"
+        style="@style/SpinKitView.FadingCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"
+        app:SpinKit_Color="@color/colorPrimary"/>
+
 </FrameLayout>

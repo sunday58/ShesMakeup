@@ -1,6 +1,7 @@
 package com.sundaydavid989.shesmakeup.ui.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
@@ -31,7 +32,10 @@ class ProductTypeAdapter(private val makeupList: List<ProductTypeItem>, private 
 
                 //Navigation
                 holder.itemView.setOnClickListener {
-                    Navigation.findNavController(itemView).navigate(R.id.productTypeDetailFragment)
+                    val bundle = Bundle()
+                    bundle.putSerializable("product", makeupList[position])
+                    Navigation.findNavController(itemView)
+                        .navigate(R.id.productTypeDetailFragment, bundle)
                 }
             }
         }
