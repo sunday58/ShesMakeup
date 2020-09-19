@@ -8,10 +8,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
+import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
 import com.sundaydavid989.shesmakeup.databinding.MakeUpListItemBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 
-class ProductTypeDetailAdapter(private val makeupList: List<MakeupItem>, private val context: Context)
+class ProductTypeDetailAdapter(private val makeupList: List<ProductItem>, private val context: Context)
     :RecyclerView.Adapter<ProductTypeDetailAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,7 +29,7 @@ class ProductTypeDetailAdapter(private val makeupList: List<MakeupItem>, private
                 binding.makeupName.text = name
                 binding.brandName.text = brand
                 GlideApp.with(context)
-                    .load(imageLink)
+                    .load(image_link)
                     .into(binding.makeUpImage)
 
                 //Navigation

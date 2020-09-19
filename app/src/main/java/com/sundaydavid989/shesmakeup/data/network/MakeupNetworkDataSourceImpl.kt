@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
+import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
 import com.sundaydavid989.shesmakeup.internal.NoConnectivityException
 
 class MakeupNetworkDataSourceImpl(
@@ -11,11 +12,11 @@ class MakeupNetworkDataSourceImpl(
 ) : MakeupNetworkDataSource {
 
     private val _downloadMakeup = MutableLiveData<Array<MakeupItem>>()
-    private val _downloadProductType = MutableLiveData<Array<MakeupItem>>()
+    private val _downloadProductType = MutableLiveData<Array<ProductItem>>()
 
     override val downloadMakeup: LiveData<out Array<MakeupItem>>
         get() = _downloadMakeup
-    override val downloadProductType: LiveData<out Array<MakeupItem>>
+    override val downloadProductType: LiveData<out Array<ProductItem>>
         get() = _downloadProductType
 
     override suspend fun fetchMakeup() {

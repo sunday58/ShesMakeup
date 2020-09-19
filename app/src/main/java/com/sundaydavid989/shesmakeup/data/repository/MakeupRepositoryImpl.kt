@@ -3,6 +3,7 @@ package com.sundaydavid989.shesmakeup.data.repository
 import androidx.lifecycle.LiveData
 import com.sundaydavid989.shesmakeup.data.db.MakeupDao
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
+import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
 import com.sundaydavid989.shesmakeup.data.network.MakeupNetworkDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -19,6 +20,9 @@ class MakeupRepositoryImpl(
             //persist makeups
             persistFetchedMakeup(makeup)
         }
+        makeupNetworkDataSource.downloadProductType.observeForever {products ->
+            persistFetchedProductType(products)
+        }
     }
 
     override suspend fun getMakeup(): LiveData<List<MakeupItem>> {
@@ -28,15 +32,21 @@ class MakeupRepositoryImpl(
         }
     }
 
-    override suspend fun getProductType(): LiveData<List<MakeupItem>> {
+    override suspend fun getProductType(): LiveData<List<ProductItem>> {
         return  withContext(Dispatchers.IO) {
-            return@withContext makeupDao.getMakeup()
+            return@withContext makeupDao.getProduct()
         }
     }
 
     private fun persistFetchedMakeup(fetchedMakeup: Array<MakeupItem>) {
         GlobalScope.launch(Dispatchers.IO) {
             makeupDao.upsert(fetchedMakeup)
+        }
+    }
+
+    private fun persistFetchedProductType(fetchedProduct: Array<ProductItem>){
+        GlobalScope.launch(Dispatchers.IO){
+            makeupDao.insertProduct(fetchedProduct)
         }
     }
 
