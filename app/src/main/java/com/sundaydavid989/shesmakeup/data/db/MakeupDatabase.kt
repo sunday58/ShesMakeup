@@ -7,12 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupTypeConverter
+import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
 
 
 @Database(
     exportSchema = false,
-    entities = [MakeupItem::class],
-    version = 2
+    entities = [MakeupItem::class, ProductItem::class],
+    version = 3
 )
 @TypeConverters(MakeupTypeConverter::class)
 abstract class MakeupDatabase : RoomDatabase() {

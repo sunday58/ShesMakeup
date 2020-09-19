@@ -3,6 +3,7 @@ package com.sundaydavid989.shesmakeup.data.network
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.sundaydavid989.shesmakeup.Constants
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
+import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -18,7 +19,7 @@ interface MakeupApiService {
     fun getMakeupAsync(): Deferred<Array<MakeupItem>>
 
     @GET("api/v1/products.json?")
-    fun getProductTypesAsync(@Query("name") name: String): Deferred<Array<MakeupItem>>
+    fun getProductTypesAsync(@Query("name") name: String): Deferred<Array<ProductItem>>
 
     companion object {
         operator fun invoke(
