@@ -33,10 +33,10 @@ class MakeupNetworkDataSourceImpl(
 
     override suspend fun fetchProductType(name: String) {
         try {
-            val fetchMakeup = makeupApiService
+            val fetchProductType = makeupApiService
                 .getProductTypesAsync(name)
                 .await()
-            _downloadProductType.postValue(fetchMakeup)
+            _downloadProductType.postValue(fetchProductType)
         }
         catch (e: NoConnectivityException){
             Log.d("connectivity ", "No internet connection", e)

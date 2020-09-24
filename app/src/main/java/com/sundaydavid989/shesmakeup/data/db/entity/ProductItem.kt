@@ -3,6 +3,7 @@ package com.sundaydavid989.shesmakeup.data.db.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import java.io.Serializable
 
 
 @Entity(tableName = "product_type")
@@ -24,4 +25,4 @@ data class ProductItem(
     val product_type: String,
     val rating: Double?,
     val website_link: String
-)
+): Serializable

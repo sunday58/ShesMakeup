@@ -20,7 +20,7 @@ class MakeupRepositoryImpl(
             //persist makeups
             persistFetchedMakeup(makeup)
         }
-        makeupNetworkDataSource.downloadProductType.observeForever {products ->
+        makeupNetworkDataSource.downloadProductType.observeForever { products ->
             persistFetchedProductType(products)
         }
     }

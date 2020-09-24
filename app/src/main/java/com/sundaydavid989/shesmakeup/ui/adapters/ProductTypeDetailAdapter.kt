@@ -33,11 +33,11 @@ class ProductTypeDetailAdapter(private val makeupList: List<ProductItem>, privat
                     .into(binding.makeUpImage)
 
                 //Navigation
-//                holder.itemView.setOnClickListener {
-//                    val bundle = Bundle()
-//                    bundle.putSerializable("makeups", makeupList[position])
-//                    Navigation.findNavController(itemView).navigate(R.id.homeDetailFragment, bundle)
-//                }
+                holder.itemView.setOnClickListener {
+                    val bundle = Bundle()
+                    bundle.putSerializable("detailMakeups", makeupList[position])
+                    Navigation.findNavController(itemView).navigate(R.id.itemDetailFragment, bundle)
+                }
             }
         }
     }

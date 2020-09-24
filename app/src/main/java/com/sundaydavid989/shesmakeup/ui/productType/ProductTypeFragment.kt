@@ -29,16 +29,16 @@ class ProductTypeFragment : Fragment() {
 
     private fun addProductItems(){
         productType = ArrayList()
-        productType.add(ProductTypeItem(R.drawable.ic_blush, "Blush"))
-        productType.add(ProductTypeItem(R.drawable.ic_bronzer, "Bronzer"))
-        productType.add(ProductTypeItem(R.drawable.ic_eyebrow, "Eyebrow"))
-        productType.add(ProductTypeItem(R.drawable.ic_eyeliner, "Eyeliner"))
-        productType.add(ProductTypeItem(R.drawable.ic_eyeshadow, "Eyeshadow"))
-        productType.add(ProductTypeItem(R.drawable.ic_foundation, "Foundation"))
-        productType.add(ProductTypeItem(R.drawable.ic_lip_liner, "LipLiner"))
-        productType.add(ProductTypeItem(R.drawable.ic_lipstick, "Lipstick"))
-        productType.add(ProductTypeItem(R.drawable.ic_mascara, "Mascara"))
-        productType.add(ProductTypeItem(R.drawable.ic_nail_polish, "NailPolish"))
+        productType.add(ProductTypeItem(R.drawable.ic_blush, "blush"))
+        productType.add(ProductTypeItem(R.drawable.ic_bronzer, "bronzer"))
+        productType.add(ProductTypeItem(R.drawable.ic_eyebrow, "eyebrow"))
+        productType.add(ProductTypeItem(R.drawable.ic_eyeliner, "eyeliner"))
+        productType.add(ProductTypeItem(R.drawable.ic_eyeshadow, "eyeshadow"))
+        productType.add(ProductTypeItem(R.drawable.ic_foundation, "foundation"))
+        productType.add(ProductTypeItem(R.drawable.ic_lip_liner, "lipLiner"))
+        productType.add(ProductTypeItem(R.drawable.ic_lipstick, "lipstick"))
+        productType.add(ProductTypeItem(R.drawable.ic_mascara, "mascara"))
+        productType.add(ProductTypeItem(R.drawable.ic_nail_polish, "nailPolish"))
 
         setData()
     }
