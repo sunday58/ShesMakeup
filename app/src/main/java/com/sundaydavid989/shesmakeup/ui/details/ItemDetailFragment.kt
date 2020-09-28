@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductColor
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
@@ -52,6 +54,12 @@ class ItemDetailFragment : Fragment() {
             GlideApp.with(requireContext())
                 .load(makeups.imageLink)
                 .into(binding!!.makeupDetailImage)
+
+            binding!!.makeupDetailImage.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable("makeupImage", makeups)
+                Navigation.findNavController(requireView()).navigate(R.id.zoomImageFragment, bundle)
+            }
 
             // for colors
             binding!!.itemColorsRecyclerView.layoutManager = LinearLayoutManager(requireContext(),

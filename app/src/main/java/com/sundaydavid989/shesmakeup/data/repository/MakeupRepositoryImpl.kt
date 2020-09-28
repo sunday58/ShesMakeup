@@ -1,6 +1,8 @@
 package com.sundaydavid989.shesmakeup.data.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
+import androidx.paging.PagedList
 import com.sundaydavid989.shesmakeup.data.db.MakeupDao
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
@@ -13,7 +15,7 @@ import kotlinx.coroutines.withContext
 class MakeupRepositoryImpl(
     private val makeupDao: MakeupDao,
     private val makeupNetworkDataSource: MakeupNetworkDataSource
-) : MakeupRepository {
+) : MakeupRepository{
 
     init {
         makeupNetworkDataSource.downloadMakeup.observeForever { makeup ->
@@ -57,4 +59,5 @@ class MakeupRepositoryImpl(
      override suspend fun fetchProductType(name: String){
         makeupNetworkDataSource.fetchProductType(name)
     }
+
 }

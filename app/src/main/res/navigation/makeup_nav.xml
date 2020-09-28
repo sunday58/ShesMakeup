@@ -36,4 +36,10 @@
         android:name="com.sundaydavid989.shesmakeup.ui.details.ProductTypeDetailFragment"
         android:label=""
         tools:layout="@layout/product_type_detail_fragment" />
+
+    <fragment
+        android:id="@+id/zoomImageFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.zoom.ZoomImageFragment"
+        android:label=""
+        tools:layout="@layout/fragment_zoom_image" />
 </navigation>

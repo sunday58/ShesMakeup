@@ -1,6 +1,7 @@
 package com.sundaydavid989.shesmakeup.data.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
 
