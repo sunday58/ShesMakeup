@@ -25,7 +25,6 @@ import com.sundaydavid989.shesmakeup.ui.adapters.MakeupLoadStateAdapter
 import com.sundaydavid989.shesmakeup.ui.base.ScopedFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
@@ -43,15 +42,14 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     private lateinit var viewModel: HomeViewModel
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding
-    private lateinit var adapter: HomeAdapter
-
-    private var makeupJob: Job? = null
+    private val adapter = HomeAdapter()
 
     //recycler view state
     private lateinit var bundleRecyclerState: Bundle
     private var listState: Parcelable? = null
 
     private fun makeUps() = launch {
+        binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         viewModel.getMakeup().collect {
             adapter.submitData(it)
         }
@@ -86,7 +84,6 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun initAdapter() {
-        binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding!!.homeRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = MakeupLoadStateAdapter { adapter.retry() },
             footer = MakeupLoadStateAdapter { adapter.retry() }
