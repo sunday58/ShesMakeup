@@ -2,6 +2,7 @@ package com.sundaydavid989.shesmakeup.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,7 +17,11 @@ interface MakeupDao {
     fun upsert(makeupItem: Array<MakeupItem>)
 
     @Query("SELECT * FROM make_up")
-    fun getMakeup(): LiveData<List<MakeupItem>>
+    fun getMakeup(): PagingSource<Int, MakeupItem>
+
+    @Query("DELETE FROM make_up")
+    suspend fun clearMakeups()
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProduct(productItem: Array<ProductItem>)
