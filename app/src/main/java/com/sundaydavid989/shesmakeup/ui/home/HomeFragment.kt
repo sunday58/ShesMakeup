@@ -27,6 +27,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -73,7 +75,10 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         initSpeedDial(savedInstanceState == null)
         binding!!.spinKit.visibility = View.VISIBLE
 
+        initAdapter()
         makeups()
+        initPosition()
+
         binding!!.retryButton.setOnClickListener { adapter.retry() }
         return binding?.root
     }
@@ -85,6 +90,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun initAdapter() {
+        binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         binding!!.homeRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = MakeupLoadStateAdapter { adapter.retry() },
             footer = MakeupLoadStateAdapter { adapter.retry() }
@@ -96,6 +102,23 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             binding!!.spinKit.isVisible = loadState.source.refresh is LoadState.Loading
             //show retry state if initial load or refresh fails
             binding!!.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.append as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+            errorState?.let {
+                showToast("Network error")
+            }
+        }
+    }
+
+    private fun initPosition(){
+        lifecycleScope.launch {
+            adapter.loadStateFlow
+                .distinctUntilChangedBy { it.refresh }
+                .filter { it.refresh is LoadState.NotLoading }
+                .collect { binding!!.homeRecyclerView.scrollToPosition(0) }
         }
     }
 
@@ -164,8 +187,9 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         }
     }
 
+    @Suppress("SameParameterValue")
     private fun showToast(message: String){
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun onPause() {
