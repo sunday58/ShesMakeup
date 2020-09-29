@@ -90,6 +90,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         )
         adapter.addLoadStateListener { loadState ->
             //only show the list if refresh succeeds
+            binding!!.homeRecyclerView.adapter!!.notifyDataSetChanged()
                 binding!!.homeRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
                 //show load spinner during initial load
                 binding!!.spinKit.isVisible = loadState.source.refresh is LoadState.Loading
@@ -201,10 +202,6 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             }, 50)
         }
         binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }
