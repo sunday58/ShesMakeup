@@ -14,7 +14,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductColor
-import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
 import com.sundaydavid989.shesmakeup.databinding.FragmentItemDetailBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 import com.sundaydavid989.shesmakeup.ui.adapters.ItemColorAdapter
@@ -24,7 +23,6 @@ class ItemDetailFragment : Fragment() {
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding
     private lateinit var makeups: MakeupItem
-    private lateinit var detailMakeups: ProductItem
     private lateinit var sheetBehavior: BottomSheetBehavior<View>
     private lateinit var adapter: ItemColorAdapter
     private var colors = ArrayList<ProductColor>()
@@ -75,30 +73,6 @@ class ItemDetailFragment : Fragment() {
                 startActivity(buyIntent)
             }
 
-        }else if (arguments != null && requireArguments().containsKey("detailMakeups")){
-            detailMakeups = requireArguments().getSerializable("detailMakeups") as ProductItem
-
-            binding!!.detailPrice.text = "$" + detailMakeups.price
-            binding!!.detailProductName.text = detailMakeups.name
-            binding!!.detailCategory.text = detailMakeups.category
-            binding!!.description.text = detailMakeups.description
-            GlideApp.with(requireContext())
-                .load(detailMakeups.image_link)
-                .into(binding!!.makeupDetailImage)
-
-            // for colors
-            binding!!.itemColorsRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
-                LinearLayoutManager.HORIZONTAL, false)
-            colors.addAll(detailMakeups.product_colors)
-            adapter = ItemColorAdapter(colors, requireContext())
-            binding!!.itemColorsRecyclerView.adapter = adapter
-            binding!!.itemColorsRecyclerView.adapter!!.notifyDataSetChanged()
-
-            //open sale url
-            binding!!.detailBuy.setOnClickListener {
-                val buyIntent = Intent(Intent.ACTION_VIEW, Uri.parse(detailMakeups.product_link))
-                startActivity(buyIntent)
-            }
         }
     }
 

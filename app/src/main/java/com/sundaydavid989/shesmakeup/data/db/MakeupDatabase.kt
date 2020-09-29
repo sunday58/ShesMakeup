@@ -7,13 +7,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupTypeConverter
-import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
 import com.sundaydavid989.shesmakeup.data.db.entity.RemoteKeys
 
 
 @Database(
     exportSchema = false,
-    entities = [MakeupItem::class, ProductItem::class, RemoteKeys::class],
+    entities = [MakeupItem::class, RemoteKeys::class],
     version = 1
 )
 @TypeConverters(MakeupTypeConverter::class)

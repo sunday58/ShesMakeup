@@ -1,13 +1,9 @@
 package com.sundaydavid989.shesmakeup.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
+import androidx.paging.PagingData
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
-import com.sundaydavid989.shesmakeup.data.db.entity.ProductItem
+import kotlinx.coroutines.flow.Flow
 
 interface MakeupRepository {
-    suspend fun getMakeup(): LiveData<List<MakeupItem>>
-    suspend fun getProductType(): LiveData<List<ProductItem>>
-
-    suspend fun fetchProductType(name: String)
+    fun getMakeupResultStream(): Flow<PagingData<MakeupItem>>
 }

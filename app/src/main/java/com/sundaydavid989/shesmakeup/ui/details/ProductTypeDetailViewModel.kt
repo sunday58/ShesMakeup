@@ -8,11 +8,4 @@ class ProductTypeDetailViewModel(
     private val makeupRepository: MakeupRepository
 ) : ViewModel() {
 
-    val productType by lazyDeferred {
-        makeupRepository.getProductType()
-    }
-
-   suspend fun fetchProductType(name: String) {
-        makeupRepository.fetchProductType(name)
-    }
 }
