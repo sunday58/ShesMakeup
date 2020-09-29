@@ -51,15 +51,11 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     private lateinit var bundleRecyclerState: Bundle
     private var listState: Parcelable? = null
 
-    private fun makeups(){
-        makeupJob?.cancel()
-        makeupJob = lifecycleScope.launch {
-            viewModel.getMakeup().collect{
-                adapter.submitData(it)
-            }
+    private fun makeUps() = launch {
+        viewModel.getMakeup().collect {
+            adapter.submitData(it)
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +72,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         binding!!.spinKit.visibility = View.VISIBLE
 
         initAdapter()
-        makeups()
+        makeUps()
         initPosition()
 
         binding!!.retryButton.setOnClickListener { adapter.retry() }
