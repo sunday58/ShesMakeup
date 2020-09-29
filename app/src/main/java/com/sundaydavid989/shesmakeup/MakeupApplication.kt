@@ -10,6 +10,7 @@ import com.sundaydavid989.shesmakeup.data.repository.MakeupRepository
 import com.sundaydavid989.shesmakeup.data.repository.MakeupRepositoryImpl
 import com.sundaydavid989.shesmakeup.ui.details.ProductTypeDetailFactory
 import com.sundaydavid989.shesmakeup.ui.home.HomeViewModelFactory
+import com.sundaydavid989.shesmakeup.ui.search.SearchViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.kodein.di.Kodein
@@ -34,5 +35,6 @@ class MakeupApplication : Application(), KodeinAware {
         bind<MakeupRepository>() with singleton { MakeupRepositoryImpl(instance(), instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
         bind() from provider { ProductTypeDetailFactory(instance()) }
+        bind() from provider { SearchViewModelFactory(instance()) }
     }
 }

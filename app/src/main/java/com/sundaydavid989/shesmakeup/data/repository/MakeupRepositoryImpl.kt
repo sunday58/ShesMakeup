@@ -42,6 +42,19 @@ class MakeupRepositoryImpl(
         ).flow
     }
 
+    override fun getMakeupBySearchResultStream(query: String): Flow<PagingData<MakeupItem>> {
+        Log.d("MakeUpRepository", "New query: $query")
+        val dbQuery = "%${query.replace(' ', '%')}%"
+        val pagingSourceFactory = { database.makeupItemDao().searchMakeup(dbQuery)}
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
+
     companion object {
         private const val NETWORK_PAGE_SIZE = 30
     }
