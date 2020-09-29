@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.Observer
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
@@ -19,12 +21,19 @@ import com.sundaydavid989.shesmakeup.Constants.KEY_RECYCLER_STATE
 import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.databinding.HomeFragmentBinding
 import com.sundaydavid989.shesmakeup.ui.adapters.HomeAdapter
+import com.sundaydavid989.shesmakeup.ui.adapters.MakeupLoadStateAdapter
 import com.sundaydavid989.shesmakeup.ui.base.ScopedFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 class HomeFragment : ScopedFragment(), KodeinAware {
 
     override val kodein by closestKodein()
@@ -34,9 +43,21 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     private val binding get() = _binding
     private lateinit var adapter: HomeAdapter
 
+    private var makeupJob: Job? = null
+
     //recycler view state
     private lateinit var bundleRecyclerState: Bundle
     private var listState: Parcelable? = null
+
+    private fun makeups(){
+        makeupJob?.cancel()
+        makeupJob = lifecycleScope.launch {
+            viewModel.getMakeup().collect{
+                adapter.submitData(it)
+            }
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,27 +72,33 @@ class HomeFragment : ScopedFragment(), KodeinAware {
 
         initSpeedDial(savedInstanceState == null)
         binding!!.spinKit.visibility = View.VISIBLE
+
+        makeups()
+        binding!!.retryButton.setOnClickListener { adapter.retry() }
         return binding?.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
-        bindUI()
+
     }
 
-    private fun bindUI() = launch {
-            binding!!.homeRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-            val makeups = viewModel.makeup.await()
-            makeups.observe(viewLifecycleOwner, Observer { makeupItems ->
-                Log.d("Makeups ", makeupItems.toString())
-                if (makeupItems == null) return@Observer
-                adapter = HomeAdapter(makeupItems, requireContext())
-                binding!!.homeRecyclerView.adapter = adapter
-                adapter.notifyDataSetChanged()
-                binding!!.spinKit.visibility = View.GONE
-            })
+    private fun initAdapter() {
+        binding!!.homeRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = MakeupLoadStateAdapter { adapter.retry() },
+            footer = MakeupLoadStateAdapter { adapter.retry() }
+        )
+        adapter.addLoadStateListener { loadState ->
+            //only show the list if refresh succeeds
+            binding!!.homeRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            //show load spinner during initial load
+            binding!!.spinKit.isVisible = loadState.source.refresh is LoadState.Loading
+            //show retry state if initial load or refresh fails
+            binding!!.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+        }
     }
+
 
     private fun initSpeedDial(addActionItem:  Boolean){
         if (addActionItem){
