@@ -54,8 +54,7 @@ class MakeupRemoteMediator(
         //make api call
         try {
             val apiResponse = service.getMakeupAsync()
-            val makeups = apiResponse.items
-            val endOfPaginationReached = makeups.isEmpty()
+            val endOfPaginationReached = apiResponse.isEmpty()
             makeupDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH){
                     makeupDatabase.remoteKeysDao().clearRemoteKeys()
@@ -63,11 +62,11 @@ class MakeupRemoteMediator(
                 }
                 val prevKey = if (page == MAKEUP_STARTING_PAGE_INDEX) null else page -1
                 val nextKey = if (endOfPaginationReached) null else page + 1
-                val keys = makeups.map {
+                val keys = apiResponse.map {
                     RemoteKeys(makeUpId = it.id, prevKey = prevKey, nextKey = nextKey)
                 }
                 makeupDatabase.remoteKeysDao().insertAll(keys)
-                makeupDatabase.makeupItemDao().upsert(makeups)
+                makeupDatabase.makeupItemDao().upsert(apiResponse)
             }
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException){

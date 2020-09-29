@@ -2,6 +2,7 @@ package com.sundaydavid989.shesmakeup.data.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.sundaydavid989.shesmakeup.Constants
+import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit
 interface MakeupApiService {
 
     @GET("api/v1/products.json")
-    fun getMakeupAsync(): MakeupResponse
+   suspend fun getMakeupAsync(): Array<MakeupItem>
 
     companion object {
         operator fun invoke(
