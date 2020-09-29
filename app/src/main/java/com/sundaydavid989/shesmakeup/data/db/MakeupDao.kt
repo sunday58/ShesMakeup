@@ -18,4 +18,8 @@ interface MakeupDao {
 
     @Query("DELETE FROM make_up")
     suspend fun clearMakeups()
+
+    //for Makeup by product type
+    @Query("SELECT * FROM make_up WHERE productType = :queryString")
+    fun makeupByType(queryString: String): PagingSource<Int, MakeupItem>
 }

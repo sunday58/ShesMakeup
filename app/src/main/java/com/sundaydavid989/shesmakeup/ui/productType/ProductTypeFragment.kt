@@ -35,10 +35,10 @@ class ProductTypeFragment : Fragment() {
         productType.add(ProductTypeItem(R.drawable.ic_eyeliner, "eyeliner"))
         productType.add(ProductTypeItem(R.drawable.ic_eyeshadow, "eyeshadow"))
         productType.add(ProductTypeItem(R.drawable.ic_foundation, "foundation"))
-        productType.add(ProductTypeItem(R.drawable.ic_lip_liner, "lipLiner"))
+        productType.add(ProductTypeItem(R.drawable.ic_lip_liner, "lip_liner"))
         productType.add(ProductTypeItem(R.drawable.ic_lipstick, "lipstick"))
         productType.add(ProductTypeItem(R.drawable.ic_mascara, "mascara"))
-        productType.add(ProductTypeItem(R.drawable.ic_nail_polish, "nailPolish"))
+        productType.add(ProductTypeItem(R.drawable.ic_nail_polish, "nail_polish"))
 
         setData()
     }

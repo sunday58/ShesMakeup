@@ -1,5 +1,6 @@
 package com.sundaydavid989.shesmakeup.data.repository
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -23,6 +24,19 @@ class MakeupRepositoryImpl(
             remoteMediator = MakeupRemoteMediator(
                 service,
                 database
+            ),
+            pagingSourceFactory = pagingSourceFactory
+        ).flow
+    }
+
+    override fun getMakeupByTypeResultStream(query: String): Flow<PagingData<MakeupItem>> {
+
+        Log.d("MakeUpRepository", "New query: $query")
+        val pagingSourceFactory = { database.makeupItemDao().makeupByType(query)}
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow

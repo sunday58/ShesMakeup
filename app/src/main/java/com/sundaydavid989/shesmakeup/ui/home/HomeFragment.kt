@@ -28,6 +28,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -67,7 +68,6 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
 
         initSpeedDial(savedInstanceState == null)
-        binding!!.spinKit.visibility = View.VISIBLE
 
         initAdapter()
         makeUps()
@@ -90,19 +90,20 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         )
         adapter.addLoadStateListener { loadState ->
             //only show the list if refresh succeeds
-            binding!!.homeRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
-            //show load spinner during initial load
-            binding!!.spinKit.isVisible = loadState.source.refresh is LoadState.Loading
-            //show retry state if initial load or refresh fails
-            binding!!.retryButton.isVisible = loadState.source.refresh is LoadState.Error
+                binding!!.homeRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                //show load spinner during initial load
+                binding!!.spinKit.isVisible = loadState.source.refresh is LoadState.Loading
+                //show retry state if initial load or refresh fails
+                binding!!.retryButton.isVisible = loadState.source.refresh is LoadState.Error
 
-            val errorState = loadState.source.append as? LoadState.Error
-                ?: loadState.source.append as? LoadState.Error
-                ?: loadState.append as? LoadState.Error
-                ?: loadState.append as? LoadState.Error
-            errorState?.let {
-                showToast("Network error")
-            }
+                val errorState = loadState.source.append as? LoadState.Error
+                    ?: loadState.source.append as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                    ?: loadState.append as? LoadState.Error
+                errorState?.let {
+                    showToast("Network error")
+                }
+
         }
     }
 

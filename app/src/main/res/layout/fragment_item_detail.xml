@@ -35,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
+        app:cardCornerRadius="0dp"
         android:layout_below="@id/makeupDetailImage">
 
         <RelativeLayout

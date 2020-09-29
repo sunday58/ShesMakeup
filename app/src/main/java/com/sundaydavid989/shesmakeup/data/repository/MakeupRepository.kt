@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MakeupRepository {
     fun getMakeupResultStream(): Flow<PagingData<MakeupItem>>
+    fun getMakeupByTypeResultStream(query: String): Flow<PagingData<MakeupItem>>
 }
