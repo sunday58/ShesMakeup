@@ -16,11 +16,6 @@ interface MakeupApiService {
     @GET("api/v1/products.json")
    suspend fun getMakeupAsync(): Array<MakeupItem>
 
-    @GET("api/v1/products.json?product_type")
-    suspend fun getProductByType(
-        @Query("blush") query: String
-    ): Array<MakeupItem>
-
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor

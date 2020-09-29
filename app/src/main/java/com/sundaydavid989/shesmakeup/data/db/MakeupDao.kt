@@ -22,4 +22,9 @@ interface MakeupDao {
     //for Makeup by product type
     @Query("SELECT * FROM make_up WHERE productType = :queryString")
     fun makeupByType(queryString: String): PagingSource<Int, MakeupItem>
+
+    //for makeup search
+    @Query("SELECT * FROM make_up WHERE name LIKE :queryString " +
+            "OR description LIKE :queryString ORDER BY name ASC")
+    fun searchMakeup(queryString: String): PagingSource<Int, MakeupItem>
 }

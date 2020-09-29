@@ -124,7 +124,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             R.drawable.ic_band)
                 .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.white,
                     requireContext().theme))
-                .setLabel("Brand")
+                .setLabel("Favorite")
                 .setLabelColor(ResourcesCompat.getColor(resources, R.color.colorPrimary,
                     requireContext().theme))
                 .create())

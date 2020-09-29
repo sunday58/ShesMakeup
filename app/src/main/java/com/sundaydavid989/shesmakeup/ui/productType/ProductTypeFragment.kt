@@ -24,6 +24,11 @@ class ProductTypeFragment : Fragment() {
     private lateinit var bundleRecyclerState: Bundle
     private var listState: Parcelable? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        bundleRecyclerState = Bundle()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
