@@ -11,12 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.like.LikeButton
+import com.like.OnLikeListener
 import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductColor
 import com.sundaydavid989.shesmakeup.databinding.FragmentItemDetailBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 import com.sundaydavid989.shesmakeup.ui.adapters.ItemColorAdapter
+
 
 class ItemDetailFragment : Fragment() {
 
@@ -60,8 +63,10 @@ class ItemDetailFragment : Fragment() {
             }
 
             // for colors
-            binding!!.itemColorsRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
-                LinearLayoutManager.HORIZONTAL, false)
+            binding!!.itemColorsRecyclerView.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL, false
+            )
             colors.addAll(makeups.productColors)
             adapter = ItemColorAdapter(colors, requireContext())
             binding!!.itemColorsRecyclerView.adapter = adapter
@@ -84,6 +89,18 @@ class ItemDetailFragment : Fragment() {
                 sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
+    }
+
+    private fun addToFavorite(){
+        binding!!.likeButton.setOnLikeListener(object : OnLikeListener {
+            override fun liked(likeButton: LikeButton?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun unLiked(likeButton: LikeButton?) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
     override fun onDestroyView() {

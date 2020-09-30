@@ -105,4 +105,7 @@ dependencies {
 
     //progress bar
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    //like button
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 }

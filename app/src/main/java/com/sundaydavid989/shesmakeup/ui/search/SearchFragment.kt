@@ -56,15 +56,22 @@ class SearchFragment : ScopedFragment(), KodeinAware {
         binding!!.searchMakeup.setOnQueryTextListener(object :
         SearchView.OnQueryTextListener{
             override fun onQueryTextChange(newText: String?): Boolean {
-
-                if (newText != null)
+                if (newText != null && newText.isNotEmpty()){
                 search(newText)
+                    binding!!.searchRecyclerView.isVisible = true
+                }else {
+                    binding!!.searchRecyclerView.isVisible = false
+                }
                 return true
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null)
+                if (query != null && query.isNotEmpty()) {
                     search(query)
+                    binding!!.searchRecyclerView.isVisible = true
+                }else {
+                    binding!!.searchRecyclerView.isVisible = false
+                }
                 return true
             }
         })
