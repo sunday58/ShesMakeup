@@ -73,4 +73,26 @@
         android:layout_marginTop="16dp"
         tools:listitem="@layout/search_list_item" />
 
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spinKit"
+        style="@style/SpinKitView.FadingCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_marginBottom="16dp"
+        app:SpinKit_Color="@color/colorPrimary"/>
+
+    <Button
+        android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retry"
+        android:layout_gravity="bottom|center"
+        android:gravity="bottom|center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/margin_24"/>
+
 </RelativeLayout>
