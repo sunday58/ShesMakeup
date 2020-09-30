@@ -33,6 +33,7 @@ class SearchViewHolder(
         binding.brandName.text = makeupList.brand
         GlideApp.with(itemView.context)
             .load(makeupList.imageLink)
+            .placeholder(R.drawable.place_holder)
             .into(binding.searchMakeUpImage)
     }
 
