@@ -121,7 +121,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     private fun initSpeedDial(addActionItem:  Boolean){
         if (addActionItem){
             binding!!.speedDial.addActionItem(SpeedDialActionItem.Builder(R.id.brand,
-            R.drawable.ic_band)
+            R.drawable.heart_on)
                 .setFabImageTintColor(ResourcesCompat.getColor(resources, R.color.white,
                     requireContext().theme))
                 .setLabel("Favorite")

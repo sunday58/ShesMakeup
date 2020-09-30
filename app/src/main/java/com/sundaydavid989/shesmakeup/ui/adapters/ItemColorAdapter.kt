@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductColor
 import com.sundaydavid989.shesmakeup.databinding.ColorsListItemBinding
@@ -23,6 +24,10 @@ class ItemColorAdapter(private val makeupList: List<ProductColor>, private val c
         with(holder) {
             with(makeupList[position]) {
                 binding.itemColor.setBackgroundColor(Color.parseColor(hexValue))
+
+                itemView.setOnClickListener {
+                    Toast.makeText(itemView.context, colourName, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
