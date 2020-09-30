@@ -24,7 +24,6 @@ interface MakeupDao {
     fun makeupByType(queryString: String): PagingSource<Int, MakeupItem>
 
     //for makeup search
-    @Query("SELECT * FROM make_up WHERE name LIKE :queryString " +
-            "OR description LIKE :queryString ORDER BY name ASC")
+    @Query("SELECT * FROM make_up WHERE name LIKE :queryString")
     fun searchMakeup(queryString: String): PagingSource<Int, MakeupItem>
 }

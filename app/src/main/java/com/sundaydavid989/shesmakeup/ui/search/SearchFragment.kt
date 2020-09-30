@@ -1,19 +1,18 @@
 package com.sundaydavid989.shesmakeup.ui.search
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import com.sundaydavid989.shesmakeup.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sundaydavid989.shesmakeup.databinding.SearchFragmentBinding
 import com.sundaydavid989.shesmakeup.ui.adapters.MakeupLoadStateAdapter
 import com.sundaydavid989.shesmakeup.ui.adapters.SearchAdapter
@@ -40,6 +39,7 @@ class SearchFragment : ScopedFragment(), KodeinAware {
     private val adapter = SearchAdapter()
 
     private fun search(query: String) = launch {
+        binding!!.searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         viewModel.searchMakeup(query).collect {
             adapter.submitData(it)
         }
@@ -53,22 +53,29 @@ class SearchFragment : ScopedFragment(), KodeinAware {
 
 
         initAdapter()
-        val query = savedInstanceState?.getString(LAST_SEARCH_QUERY) ?: DEFAULT_QUERY
-        search(query)
-        initSearch(query)
+        binding!!.searchMakeup.setOnQueryTextListener(object :
+        SearchView.OnQueryTextListener{
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                if (newText != null)
+                search(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null)
+                    search(query)
+                return true
+            }
+        })
         binding!!.retryButton.setOnClickListener { adapter.retry() }
+        initSearch()
         return binding?.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SearchViewModel::class.java)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putString(LAST_SEARCH_QUERY,
-        binding!!.searchMakeup.text.trim().toString())
     }
 
     private fun initAdapter(){
@@ -100,46 +107,14 @@ class SearchFragment : ScopedFragment(), KodeinAware {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
-    private fun initSearch(query: String) {
-        binding!!.searchMakeup.setText(query)
+    private fun initSearch() {
 
-        binding!!.searchMakeup.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_GO) {
-                updateSearchListFromInput()
-                true
-            }else {
-                false
-            }
-        }
-        binding!!.searchMakeup.setOnKeyListener { _, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode ==
-                    KeyEvent.KEYCODE_ENTER) {
-                updateSearchListFromInput()
-                true
-            }else {
-                false
-            }
-        }
         lifecycleScope.launch {
             adapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
                 .filter { it.refresh is LoadState.NotLoading }
                 .collect { binding!!.searchRecyclerView.scrollToPosition(0) }
         }
-    }
-
-    private fun updateSearchListFromInput() {
-        binding!!.searchMakeup.text.trim().let {
-            if (it.isNotEmpty()) {
-                binding!!.searchRecyclerView.scrollToPosition(0)
-
-            }
-        }
-    }
-
-    companion object {
-        private const val LAST_SEARCH_QUERY: String = "last_search_query"
-        private const val DEFAULT_QUERY = "lipstick"
     }
 
 }
