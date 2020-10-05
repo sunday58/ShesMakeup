@@ -7,17 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sundaydavid989.shesmakeup.Constants
+import com.sundaydavid989.shesmakeup.R
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductTypeItem
 import com.sundaydavid989.shesmakeup.databinding.ProductTypeDetailFragmentBinding
 import com.sundaydavid989.shesmakeup.ui.adapters.HomeAdapter
 import com.sundaydavid989.shesmakeup.ui.adapters.MakeupLoadStateAdapter
 import com.sundaydavid989.shesmakeup.ui.base.ScopedFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
@@ -49,6 +52,11 @@ class ProductTypeDetailFragment : ScopedFragment(), KodeinAware {
     private fun makeups() = launch {
         if (arguments != null && requireArguments().containsKey("product")){
             productName = requireArguments().getSerializable("product") as ProductTypeItem
+
+            //set Title
+            (activity as AppCompatActivity).toolbar.title = productName.productTypeName
+            (activity as AppCompatActivity).toolbar.setNavigationIcon( R.drawable.ic_arrow_back)
+
 
             binding!!.productTypeDetailRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
             viewModel.searchItemType(productName.productTypeName).collect {

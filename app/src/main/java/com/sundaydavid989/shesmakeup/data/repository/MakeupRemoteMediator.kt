@@ -60,8 +60,8 @@ class MakeupRemoteMediator(
                     makeupDatabase.remoteKeysDao().clearRemoteKeys()
                     makeupDatabase.makeupItemDao().clearMakeups()
                 }
-                val prevKey = if (page == MAKEUP_STARTING_PAGE_INDEX) null else page -1
-                val nextKey = if (endOfPaginationReached) null else page + 1
+                val prevKey = if (page == MAKEUP_STARTING_PAGE_INDEX) null else page.minus(1)
+                val nextKey = if (endOfPaginationReached) null else page.plus(1)
                 val keys = apiResponse.map {
                     RemoteKeys(makeUpId = it.id, prevKey = prevKey, nextKey = nextKey)
                 }

@@ -19,7 +19,8 @@ class MakeupRepositoryImpl(
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                prefetchDistance = 2
             ),
             remoteMediator = MakeupRemoteMediator(
                 service,
@@ -36,7 +37,8 @@ class MakeupRepositoryImpl(
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                prefetchDistance = 3
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
@@ -49,7 +51,8 @@ class MakeupRepositoryImpl(
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                prefetchDistance = 3
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
