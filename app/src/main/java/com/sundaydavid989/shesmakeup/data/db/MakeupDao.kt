@@ -1,5 +1,6 @@
 package com.sundaydavid989.shesmakeup.data.db
 
+import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -26,4 +27,16 @@ interface MakeupDao {
     //for makeup search
     @Query("SELECT * FROM make_up WHERE name LIKE :queryString")
     fun searchMakeup(queryString: String): PagingSource<Int, MakeupItem>
+
+    //for favorite
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFavorite(favoriteItem: MakeupItem)
+
+    @Query("SELECT * FROM make_up")
+    fun getFavorite(): LiveData<List<MakeupItem>>
+
+    @Query("Delete FROM make_up")
+    suspend fun deleteFavorite()
+
+
 }

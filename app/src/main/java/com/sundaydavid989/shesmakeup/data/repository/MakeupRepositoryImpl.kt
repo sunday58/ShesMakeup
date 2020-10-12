@@ -1,13 +1,18 @@
 package com.sundaydavid989.shesmakeup.data.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.sundaydavid989.shesmakeup.data.db.MakeupDatabase
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.network.MakeupApiService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MakeupRepositoryImpl(
     private val service: MakeupApiService,
@@ -56,6 +61,18 @@ class MakeupRepositoryImpl(
             ),
             pagingSourceFactory = pagingSourceFactory
         ).flow
+    }
+
+     override fun addFavorite(favoriteItem: MakeupItem) {
+        GlobalScope.launch(Dispatchers.IO){
+            database.makeupItemDao().insertFavorite(favoriteItem)
+        }
+    }
+
+    override suspend fun getFavorite(): LiveData<List<MakeupItem>> {
+        return withContext(Dispatchers.IO){
+            return@withContext database.makeupItemDao().getFavorite()
+        }
     }
 
     companion object {
