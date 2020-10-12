@@ -28,7 +28,6 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -161,7 +160,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
                 when (actionItem.id) {
                     R.id.brand -> {
                         Navigation.findNavController(binding!!.homeLayout)
-                            .navigate(R.id.brandFragment)
+                            .navigate(R.id.favoriteFragment)
                         return@setOnActionSelectedListener true
                     }
                     R.id.product_type -> {

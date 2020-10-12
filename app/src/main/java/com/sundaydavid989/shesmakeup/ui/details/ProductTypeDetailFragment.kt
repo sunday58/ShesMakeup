@@ -140,4 +140,8 @@ class ProductTypeDetailFragment : ScopedFragment(), KodeinAware {
         binding!!.productTypeDetailRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
 }

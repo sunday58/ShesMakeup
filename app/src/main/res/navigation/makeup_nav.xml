@@ -11,10 +11,10 @@
         android:label="home_fragment"
         tools:layout="@layout/home_fragment" />
     <fragment
-        android:id="@+id/brandFragment"
-        android:name="com.sundaydavid989.shesmakeup.ui.brand.BrandFragment"
+        android:id="@+id/favoriteFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.favorite.FavoriteFragment"
         android:label="Favorite"
-        tools:layout="@layout/brand_fragment" />
+        tools:layout="@layout/favorite_fragment" />
     <fragment
         android:id="@+id/productTypeFragment"
         android:name="com.sundaydavid989.shesmakeup.ui.productType.ProductTypeFragment"
