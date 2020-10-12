@@ -27,7 +27,7 @@
         tools:layout="@layout/search_fragment" />
     <fragment
         android:id="@+id/itemDetailFragment"
-        android:name="com.sundaydavid989.shesmakeup.ui.details.ItemDetailFragment"
+        android:name="com.sundaydavid989.shesmakeup.ui.itemDetails.ItemDetailFragment"
         android:label=""
         tools:layout="@layout/fragment_item_detail" />
 

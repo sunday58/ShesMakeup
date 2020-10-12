@@ -2,10 +2,7 @@ package com.sundaydavid989.shesmakeup.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 
 @Dao
@@ -35,8 +32,8 @@ interface MakeupDao {
     @Query("SELECT * FROM make_up")
     fun getFavorite(): LiveData<List<MakeupItem>>
 
-    @Query("Delete FROM make_up")
-    suspend fun deleteFavorite()
+    @Delete
+    fun deleteFavorite(favorite: MakeupItem)
 
 
 }

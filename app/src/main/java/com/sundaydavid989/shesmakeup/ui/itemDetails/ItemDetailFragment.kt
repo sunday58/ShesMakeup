@@ -1,4 +1,4 @@
-package com.sundaydavid989.shesmakeup.ui.details
+package com.sundaydavid989.shesmakeup.ui.itemDetails
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -19,6 +20,7 @@ import com.sundaydavid989.shesmakeup.data.db.entity.ProductColor
 import com.sundaydavid989.shesmakeup.databinding.FragmentItemDetailBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 import com.sundaydavid989.shesmakeup.ui.adapters.ItemColorAdapter
+import com.sundaydavid989.shesmakeup.ui.favorite.FavoriteViewModel
 
 
 class ItemDetailFragment : Fragment() {
@@ -30,6 +32,8 @@ class ItemDetailFragment : Fragment() {
     private lateinit var adapter: ItemColorAdapter
     private var colors = ArrayList<ProductColor>()
 
+    private lateinit var viewModel: ItemDetailViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,16 +41,22 @@ class ItemDetailFragment : Fragment() {
         // Inflate the layout for this fragment
        _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
 
+        //get bundle
+        makeups = requireArguments().getSerializable("makeups") as MakeupItem
         sheetBehavior = BottomSheetBehavior.from(binding!!.bottomSheet)
         checkBottomSheet()
         detailMakeup()
         return binding?.root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(ItemDetailViewModel::class.java)
+    }
+
     @SuppressLint("SetTextI18n")
     private fun detailMakeup(){
         if (arguments != null && requireArguments().containsKey("makeups")){
-            makeups = requireArguments().getSerializable("makeups") as MakeupItem
 
             binding!!.detailPrice.text = "$" + makeups.price
             binding!!.detailProductName.text = makeups.name
@@ -94,7 +104,9 @@ class ItemDetailFragment : Fragment() {
     private fun addToFavorite(){
         binding!!.likeButton.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
-                TODO("Not yet implemented")
+                if (!likeButton!!.isLiked){
+                    viewModel.addFavorite(makeups)
+                }
             }
 
             override fun unLiked(likeButton: LikeButton?) {

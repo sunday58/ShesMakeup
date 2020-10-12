@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.details.ItemDetailFragment">
+    tools:context=".ui.itemDetails.ItemDetailFragment">
 
 
 <androidx.core.widget.NestedScrollView
@@ -21,7 +21,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.details.ItemDetailFragment">
+    tools:context=".ui.itemDetails.ItemDetailFragment">
 
    <ImageView
        android:id="@+id/makeupDetailImage"
@@ -145,7 +145,7 @@
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:fitsSystemWindows="true"
-tools:context=".ui.details.ItemDetailFragment">
+tools:context=".ui.itemDetails.ItemDetailFragment">
 
 <LinearLayout
     android:layout_width="match_parent"

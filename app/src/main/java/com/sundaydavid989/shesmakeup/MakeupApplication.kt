@@ -9,6 +9,7 @@ import com.sundaydavid989.shesmakeup.data.repository.MakeupRemoteMediator
 import com.sundaydavid989.shesmakeup.data.repository.MakeupRepository
 import com.sundaydavid989.shesmakeup.data.repository.MakeupRepositoryImpl
 import com.sundaydavid989.shesmakeup.ui.details.ProductTypeDetailFactory
+import com.sundaydavid989.shesmakeup.ui.favorite.FavoriteViewModelFactory
 import com.sundaydavid989.shesmakeup.ui.home.HomeViewModelFactory
 import com.sundaydavid989.shesmakeup.ui.search.SearchViewModelFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -36,5 +37,6 @@ class MakeupApplication : Application(), KodeinAware {
         bind() from provider { HomeViewModelFactory(instance()) }
         bind() from provider { ProductTypeDetailFactory(instance()) }
         bind() from provider { SearchViewModelFactory(instance()) }
+        bind() from provider { FavoriteViewModelFactory(instance()) }
     }
 }

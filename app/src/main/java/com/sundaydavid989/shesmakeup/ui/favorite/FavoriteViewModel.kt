@@ -14,13 +14,14 @@ class FavoriteViewModel(
     private val viewModelJob = SupervisorJob()
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.IO)
 
-    fun addFavorite(favoriteItem: MakeupItem){
-        makeupRepository.addFavorite(favoriteItem)
-    }
-
     fun getFavorite() {
         viewModelScope.launch {
             makeupRepository.getFavorite()
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
     }
 }
