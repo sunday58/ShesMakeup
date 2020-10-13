@@ -46,6 +46,7 @@ class ItemDetailFragment : Fragment() {
         sheetBehavior = BottomSheetBehavior.from(binding!!.bottomSheet)
         checkBottomSheet()
         detailMakeup()
+        addToFavorite()
         return binding?.root
     }
 
@@ -110,7 +111,9 @@ class ItemDetailFragment : Fragment() {
             }
 
             override fun unLiked(likeButton: LikeButton?) {
-                TODO("Not yet implemented")
+                if (likeButton!!.isLiked){
+                    viewModel.deleteFavorite(makeups)
+                }
             }
         })
     }

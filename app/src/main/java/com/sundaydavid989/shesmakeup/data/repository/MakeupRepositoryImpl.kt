@@ -75,6 +75,12 @@ class MakeupRepositoryImpl(
         }
     }
 
+    override fun deleteFavorite(favorite: MakeupItem) {
+        GlobalScope.launch(Dispatchers.IO){
+            database.makeupItemDao().deleteFavorite(favorite)
+        }
+    }
+
     companion object {
         private const val NETWORK_PAGE_SIZE = 30
     }

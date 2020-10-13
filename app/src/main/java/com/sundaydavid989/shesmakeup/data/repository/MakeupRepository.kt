@@ -13,4 +13,5 @@ interface MakeupRepository {
     // for favorite
     fun addFavorite(favoriteItem: MakeupItem)
     suspend fun getFavorite(): LiveData<List<MakeupItem>>
+    fun deleteFavorite(favorite: MakeupItem)
 }

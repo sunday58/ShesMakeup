@@ -11,4 +11,8 @@ class ItemDetailViewModel(
     fun addFavorite(favoriteItem: MakeupItem){
         makeupRepository.addFavorite(favoriteItem)
     }
+
+    fun deleteFavorite(favorite: MakeupItem){
+        makeupRepository.deleteFavorite(favorite)
+    }
 }

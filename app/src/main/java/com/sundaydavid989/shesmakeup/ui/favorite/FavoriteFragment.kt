@@ -5,26 +5,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.sundaydavid989.shesmakeup.databinding.BrandFragmentBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.sundaydavid989.shesmakeup.databinding.FavoriteFragmentBinding
+import com.sundaydavid989.shesmakeup.ui.adapters.FavoriteAdapter
+import com.sundaydavid989.shesmakeup.ui.base.ScopedFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.launch
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class FavoriteFragment : Fragment() {
+
+@ExperimentalCoroutinesApi
+@FlowPreview
+class FavoriteFragment : ScopedFragment(), KodeinAware {
+
+    override val kodein by closestKodein()
+    private val viewModelFactory: FavoriteViewModelFactory by instance()
 
     private lateinit var viewModel: FavoriteViewModel
-    private var _binding: BrandFragmentBinding? = null
+    private var _binding: FavoriteFragmentBinding? = null
     private val binding get() = _binding
+    private lateinit var adapter: FavoriteAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = BrandFragmentBinding.inflate(inflater, container, false)
+        _binding = FavoriteFragmentBinding.inflate(inflater, container, false)
         return binding!!.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(FavoriteViewModel::class.java)
+        bindUI()
+    }
+
+    private fun bindUI() = launch {
+        binding!!.favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val favorite = viewModel.favorite.await()
+        favorite.observe(viewLifecycleOwner, Observer { favoriteList ->
+            if (favoriteList == null) binding!!.emptyFavorite.visibility = View.VISIBLE
+            adapter = FavoriteAdapter(favoriteList)
+            binding!!.favoriteRecyclerView.adapter = adapter
+            binding!!.emptyFavorite.visibility = View.GONE
+            adapter.notifyDataSetChanged()
+        })
 
     }
 
