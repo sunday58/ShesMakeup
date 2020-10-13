@@ -1,11 +1,9 @@
 package com.sundaydavid989.shesmakeup.ui.favorite
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sundaydavid989.shesmakeup.databinding.FavoriteFragmentBinding
@@ -14,7 +12,6 @@ import com.sundaydavid989.shesmakeup.ui.base.ScopedFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -49,7 +46,7 @@ class FavoriteFragment : ScopedFragment(), KodeinAware {
     private fun bindUI() = launch {
         binding!!.favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         val favorite = viewModel.favorite.await()
-        favorite.observe(viewLifecycleOwner, Observer { favoriteList ->
+        favorite.observe(viewLifecycleOwner, { favoriteList ->
             if (favoriteList == null) binding!!.emptyFavorite.visibility = View.VISIBLE
             adapter = FavoriteAdapter(favoriteList)
             binding!!.favoriteRecyclerView.adapter = adapter

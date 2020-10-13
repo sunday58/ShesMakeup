@@ -3,6 +3,7 @@ package com.sundaydavid989.shesmakeup.data.db
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import androidx.room.*
+import com.sundaydavid989.shesmakeup.data.db.entity.FavoriteItem
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 
 @Dao
@@ -27,13 +28,13 @@ interface MakeupDao {
 
     //for favorite
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFavorite(favoriteItem: MakeupItem)
+    fun insertFavorite(favoriteItem: FavoriteItem)
 
-    @Query("SELECT * FROM make_up")
-    fun getFavorite(): LiveData<List<MakeupItem>>
+    @Query("SELECT * FROM favorite")
+    fun getFavorite(): LiveData<List<FavoriteItem>>
 
     @Delete
-    fun deleteFavorite(favorite: MakeupItem)
+    fun deleteFavorite(favorite: FavoriteItem)
 
 
 }

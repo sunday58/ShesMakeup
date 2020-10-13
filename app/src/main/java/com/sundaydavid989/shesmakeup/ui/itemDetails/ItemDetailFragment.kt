@@ -20,10 +20,19 @@ import com.sundaydavid989.shesmakeup.data.db.entity.ProductColor
 import com.sundaydavid989.shesmakeup.databinding.FragmentItemDetailBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 import com.sundaydavid989.shesmakeup.ui.adapters.ItemColorAdapter
-import com.sundaydavid989.shesmakeup.ui.favorite.FavoriteViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
 
-class ItemDetailFragment : Fragment() {
+@ExperimentalCoroutinesApi
+@FlowPreview
+class ItemDetailFragment : Fragment(), KodeinAware {
+
+    override val kodein by closestKodein()
+    private val viewModelFactory: ItemDetailViewModelFactory by instance()
 
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding
@@ -52,7 +61,7 @@ class ItemDetailFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ItemDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ItemDetailViewModel::class.java)
     }
 
     @SuppressLint("SetTextI18n")
@@ -108,6 +117,7 @@ class ItemDetailFragment : Fragment() {
                 if (!likeButton!!.isLiked){
                     viewModel.addFavorite(makeups)
                 }
+
             }
 
             override fun unLiked(likeButton: LikeButton?) {
