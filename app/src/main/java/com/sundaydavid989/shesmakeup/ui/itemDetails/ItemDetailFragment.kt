@@ -115,18 +115,16 @@ class ItemDetailFragment : Fragment(), KodeinAware {
     private fun addToFavorite(){
         binding!!.likeButton.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
-                if (!likeButton!!.isLiked){
                     val favorites = FavoriteItem(makeups.id, makeups, true)
                     viewModel.addFavorite(favorites)
-                }
+
                 binding!!.likeButton.isLiked = true
             }
 
             override fun unLiked(likeButton: LikeButton?) {
-                if (likeButton!!.isLiked){
                     val favorites = FavoriteItem(makeups.id, makeups, false)
                     viewModel.deleteFavorite(favorites)
-                }
+
                 binding!!.likeButton.isLiked = false
             }
         })
