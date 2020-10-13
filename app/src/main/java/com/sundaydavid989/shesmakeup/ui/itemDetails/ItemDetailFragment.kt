@@ -15,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.like.LikeButton
 import com.like.OnLikeListener
 import com.sundaydavid989.shesmakeup.R
+import com.sundaydavid989.shesmakeup.data.db.entity.FavoriteItem
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.ProductColor
 import com.sundaydavid989.shesmakeup.databinding.FragmentItemDetailBinding
@@ -115,15 +116,18 @@ class ItemDetailFragment : Fragment(), KodeinAware {
         binding!!.likeButton.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
                 if (!likeButton!!.isLiked){
-                    viewModel.addFavorite(makeups)
+                    val favorites = FavoriteItem(makeups.id, makeups, true)
+                    viewModel.addFavorite(favorites)
                 }
-
+                binding!!.likeButton.isLiked = true
             }
 
             override fun unLiked(likeButton: LikeButton?) {
                 if (likeButton!!.isLiked){
-                    viewModel.deleteFavorite(makeups)
+                    val favorites = FavoriteItem(makeups.id, makeups, false)
+                    viewModel.deleteFavorite(favorites)
                 }
+                binding!!.likeButton.isLiked = false
             }
         })
     }

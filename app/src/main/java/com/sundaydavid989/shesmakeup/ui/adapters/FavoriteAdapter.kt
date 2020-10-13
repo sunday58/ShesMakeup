@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.sundaydavid989.shesmakeup.R
+import com.sundaydavid989.shesmakeup.data.db.entity.FavoriteItem
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.databinding.SearchListItemBinding
 import com.sundaydavid989.shesmakeup.internal.glide.GlideApp
 
-class FavoriteAdapter(private val favMakeups: List<MakeupItem>)
+class FavoriteAdapter(private val favMakeups: List<FavoriteItem>)
     :RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(){
 
 
@@ -23,15 +24,15 @@ class FavoriteAdapter(private val favMakeups: List<MakeupItem>)
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         with(holder){
             with(favMakeups[position]){
-                binding.searchMakeupName.text = name
-                binding.brandName.text = brand
+                binding.searchMakeupName.text = makeup.name
+                binding.brandName.text = makeup.brand
                 GlideApp.with(itemView.context)
-                    .load(imageLink)
+                    .load(makeup.imageLink)
                     .into(binding.searchMakeUpImage)
 
                 holder.itemView.setOnClickListener {
                     val bundle = Bundle()
-                    bundle.putSerializable("makeups", favMakeups[position])
+                    bundle.putSerializable("makeups", makeup)
                     Navigation.findNavController(holder.itemView).navigate(R.id.itemDetailFragment, bundle)
                 }
             }

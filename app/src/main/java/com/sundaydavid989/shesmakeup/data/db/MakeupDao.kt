@@ -30,7 +30,7 @@ interface MakeupDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavorite(favoriteItem: FavoriteItem)
 
-    @Query("SELECT * FROM favorite")
+    @Query("SELECT * FROM favorite_table")
     fun getFavorite(): LiveData<List<FavoriteItem>>
 
     @Delete

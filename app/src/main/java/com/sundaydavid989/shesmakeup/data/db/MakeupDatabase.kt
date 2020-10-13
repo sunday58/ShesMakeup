@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.sundaydavid989.shesmakeup.data.db.entity.FavoriteItem
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupTypeConverter
 import com.sundaydavid989.shesmakeup.data.db.entity.RemoteKeys
@@ -12,8 +13,8 @@ import com.sundaydavid989.shesmakeup.data.db.entity.RemoteKeys
 
 @Database(
     exportSchema = false,
-    entities = [MakeupItem::class, RemoteKeys::class],
-    version = 1
+    entities = [MakeupItem::class, RemoteKeys::class,  FavoriteItem::class],
+    version = 2
 )
 @TypeConverters(MakeupTypeConverter::class)
 abstract class MakeupDatabase : RoomDatabase() {

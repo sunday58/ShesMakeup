@@ -6,6 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.sundaydavid989.shesmakeup.data.db.MakeupDatabase
+import com.sundaydavid989.shesmakeup.data.db.entity.FavoriteItem
 import com.sundaydavid989.shesmakeup.data.db.entity.MakeupItem
 import com.sundaydavid989.shesmakeup.data.network.MakeupApiService
 import kotlinx.coroutines.Dispatchers
@@ -63,19 +64,19 @@ class MakeupRepositoryImpl(
         ).flow
     }
 
-     override fun addFavorite(favoriteItem: MakeupItem) {
+     override fun addFavorite(favoriteItem: FavoriteItem) {
         GlobalScope.launch(Dispatchers.IO){
             database.makeupItemDao().insertFavorite(favoriteItem)
         }
     }
 
-    override suspend fun getFavorite(): LiveData<List<MakeupItem>> {
+    override suspend fun getFavorite(): LiveData<List<FavoriteItem>> {
         return withContext(Dispatchers.IO){
             return@withContext database.makeupItemDao().getFavorite()
         }
     }
 
-    override fun deleteFavorite(favorite: MakeupItem) {
+    override fun deleteFavorite(favorite: FavoriteItem) {
         GlobalScope.launch(Dispatchers.IO){
             database.makeupItemDao().deleteFavorite(favorite)
         }
